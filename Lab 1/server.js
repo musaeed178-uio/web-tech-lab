@@ -283,7 +283,7 @@ initDatabase().then(() => {
     console.log(`
   ╔══════════════════════════════════════════════════════╗
   ║   COMSATS Lost and Found Portal                      ║
-  ║   Server running at http://localhost:${PORT}         ║
+  ║   Server running at http://localhost:${PORT}            ║
   ║                                                      ║
   ║   Default Admin: admin / admin123                    ║
   ║                                                      ║
