@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - COMSATS Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="navbar">
+            <div class="nav-brand">🎓 COMSATS Admin Panel</div>
+            <div class="nav-user">
+                <span id="user-display"></span>
+                <button onclick="window.location.href='/dashboard'" class="btn btn-small">Back to Dashboard</button>
+                <button onclick="handleLogout()" class="btn btn-small btn-logout">Sign Out</button>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-total">0</div>
+                    <div class="stat-label">Total Items</div>
+                </div>
+                <div class="stat-card stat-lost">
+                    <div class="stat-number" id="stat-lost">0</div>
+                    <div class="stat-label">Lost Items</div>
+                </div>
+                <div class="stat-card stat-found">
+                    <div class="stat-number" id="stat-found">0</div>
+                    <div class="stat-label">Found Items</div>
+                </div>
+                <div class="stat-card stat-users">
+                    <div class="stat-number" id="stat-users">0</div>
+                    <div class="stat-label">Registered Users</div>
+                </div>
+            </div>
+
+            <!-- Users Section -->
+            <div class="card">
+                <h2>👥 Manage Users</h2>
+                <div id="users-list" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Items Section -->
+            <div class="card">
+                <h2>📦 All Items</h2>
+                <div id="admin-items-list" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Reported By</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-items-tbody">
+                            <!-- Items will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

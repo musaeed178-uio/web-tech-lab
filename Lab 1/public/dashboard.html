@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - COMSATS Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="navbar">
+            <div class="nav-brand">🎓 COMSATS Lost & Found</div>
+            <div class="nav-user">
+                <span id="user-display"></span>
+                <button onclick="goToAdmin()" id="admin-btn" class="btn btn-small btn-admin" style="display:none;">Admin Panel</button>
+                <button onclick="handleLogout()" class="btn btn-small btn-logout">Sign Out</button>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <!-- Report Item Section -->
+            <div class="card report-card">
+                <h2>📋 Report an Item</h2>
+                <form onsubmit="reportItem(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Item Title</label>
+                            <input type="text" id="item-title" placeholder="e.g., Blue Backpack" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="item-category" required>
+                                <option value="">Select category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="bags">Bags & Purses</option>
+                                <option value="documents">Documents</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="id-cards">ID Cards</option>
+                                <option value="keys">Keys</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="item-description" placeholder="Describe the item..." rows="2"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="item-location" placeholder="e.g., Library, C-block">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="item-status" required>
+                                <option value="lost">Lost</option>
+                                <option value="found">Found</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Report Item</button>
+                </form>
+            </div>
+
+            <!-- Search & Filter -->
+            <div class="card search-card">
+                <div class="search-row">
+                    <input type="text" id="search-input" placeholder="🔍 Search items..." oninput="searchItems()">
+                    <select id="filter-status" onchange="searchItems()">
+                        <option value="">All Status</option>
+                        <option value="lost">Lost</option>
+                        <option value="found">Found</option>
+                        <option value="claimed">Claimed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Items List -->
+            <div class="card">
+                <h2>📦 Recent Items</h2>
+                <div id="items-list" class="items-grid">
+                    <!-- Items will be loaded here -->
+                </div>
+                <p id="no-items" class="no-items" style="display:none;">No items found.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Edit Item</h2>
+            <form onsubmit="updateItem(event)">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="edit-title" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="edit-description" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="edit-category">
+                            <option value="electronics">Electronics</option>
+                            <option value="bags">Bags & Purses</option>
+                            <option value="documents">Documents</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="id-cards">ID Cards</option>
+                            <option value="keys">Keys</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="edit-status">
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                            <option value="claimed">Claimed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="edit-location">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
