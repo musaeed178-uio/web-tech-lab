@@ -1,284 +1,348 @@
-# 🎓 COMSATS University Lost & Found Portal
+# COMSATS University - Lost & Found Portal
 
-A web application for reporting and finding lost items on campus.
+A professional web application for the COMSATS campus community to report, search, and recover lost and found items.
 
-## 📁 Project Structure
+## Features
 
-```
-Lab 1/
-├── server.js              # Backend server (Node.js + Express)
-├── package.json           # Project dependencies
-├── lost_and_found.db      # SQLite database (auto-created)
-├── README.md              # This file
-└── public/                # Frontend files
-    ├── index.html         # Login/Signup page
-    ├── dashboard.html     # Main user dashboard
-    ├── admin.html         # Admin panel
-    ├── css/
-    │   └── style.css      # All styling
-    └── js/
-        ├── auth.js        # Login/Signup logic
-        ├── dashboard.js   # Dashboard logic
-        └── admin.js       # Admin panel logic
-```
+- **Item Reporting** - Report lost or found items with category, location, and description
+- **Claim System** - Found item owners can submit proof-of-ownership claims
+- **Admin Review** - Admins review and approve/reject claims before contact info is shared
+- **Messaging** - Approved claimants and item reporters can communicate directly
+- **Dark/Light Mode** - Toggle between themes for user preference
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **Secure Authentication** - Parameterized SQL queries prevent SQL injection
+- **Admin Dashboard** - Full control over users, items, and claims
 
----
+## Quick Start
 
-## 🚀 How to Run
+### Prerequisites
 
-### Step 1: Install Node.js
-Download and install Node.js from https://nodejs.org
+- [Node.js](https://nodejs.org) (v16 or higher)
 
-### Step 2: Open Terminal in this folder
+### Installation
+
 ```bash
+# Navigate to the project folder
 cd "Lab 1"
-```
 
-### Step 3: Install dependencies
-```bash
+# Install dependencies
 npm install
-```
 
-### Step 4: Start the server
-```bash
+# Start the server
 npm start
 ```
 
-### Step 5: Open browser
-Go to: **http://localhost:3000**
+### Access the Application
 
----
+Open your browser and go to: **http://localhost:3000**
 
-## 🔐 Default Login
+### Default Admin Credentials
 
-| Username | Password | Role |
-|----------|----------|------|
-| `admin`  | `admin123` | Admin |
+| Username | Password |
+|----------|----------|
+| `admin`  | `admin123` |
 
----
+## Project Structure
 
-## 📱 Pages
+```
+Lab 1/
+├── server.js              # Backend server (Express + SQLite)
+├── package.json           # Project dependencies
+├── lost_and_found.db      # SQLite database (auto-created)
+├── README.md              # Documentation
+└── public/
+    ├── index.html         # Login/Signup page
+    ├── dashboard.html     # User dashboard
+    ├── admin.html         # Admin panel
+    ├── item.html          # Item detail page
+    ├── css/
+    │   └── style.css      # All styling with dark/light themes
+    └── js/
+        ├── auth.js        # Login/signup logic
+        ├── dashboard.js   # Dashboard logic
+        ├── admin.js       # Admin panel logic
+        └── item.js        # Item detail & messaging logic
+```
 
-1. **Login/Signup Page** (`/`) - Create account or sign in
-2. **Dashboard** (`/dashboard`) - Report items, view all items, search
-3. **Admin Panel** (`/admin`) - Manage users and all items (admin only)
+## How It Works
 
----
+### For Regular Users
 
-## 💡 What is an API? (Simple Explanation)
+1. **Sign Up** - Create an account with your COMSATS email
+2. **Report Items** - Report something you lost or found
+3. **Browse Items** - Search and filter through reported items
+4. **Claim Items** - If you see your lost item marked as "Found", click "Claim This Item"
+5. **Provide Proof** - Describe details only you would know (serial number, unique markings, etc.)
+6. **Wait for Review** - An admin reviews your claim
+7. **Chat** - Once approved, contact information is revealed and you can message the finder
 
-Think of an API like a **waiter in a restaurant**:
+### For Admins
 
-- You (the frontend) sit at a table
-- The kitchen (the database) is in the back
+1. **Review Claims** - Approve or reject item claims with notes
+2. **Manage Users** - Activate/deactivate accounts, change roles
+3. **Manage Items** - Delete inappropriate or resolved items
+4. **View Statistics** - Monitor total items, claims, and user activity
+
+## Understanding APIs
+
+### What is an API?
+
+An API (Application Programming Interface) is like a **messenger** between the frontend (what you see) and the backend (the server and database).
+
+**Analogy:** Think of a restaurant:
+- You (the user) sit at a table
+- The kitchen (the database) prepares food
 - The waiter (the API) takes your order to the kitchen and brings back your food
 
-**You don't go to the kitchen yourself.** The waiter handles communication.
+You never go to the kitchen yourself. The waiter handles all communication.
 
-### In technical terms:
-- **Frontend** = What you see (buttons, forms, pages)
-- **Backend** = The server that processes requests
-- **Database** = Where data is stored
-- **API** = The messenger that sends data between frontend and backend
+### API Endpoints
 
----
+#### Authentication
 
-## 🔌 API Endpoints (The "Menu" the waiter knows)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/signup` | Create a new user account |
+| `POST` | `/api/login` | Authenticate and get user info |
 
-### Authentication
-
-#### 1. Create Account (Signup)
-```
-POST /api/signup
-```
-**What it does:** Creates a new user account
-
-**Data sent:**
+**POST /api/signup**
 ```json
-{
-    "username": "john",
+Request: {
+    "username": "john_doe",
     "email": "john@comsats.edu.pk",
-    "password": "mypassword"
+    "password": "securepass123",
+    "full_name": "John Doe",
+    "phone": "+92-300-1234567"
+}
+
+Response: {
+    "message": "Account created successfully."
 }
 ```
 
-**Response (success):**
+**POST /api/login**
 ```json
-{
-    "message": "Account created successfully"
+Request: {
+    "username": "john_doe",
+    "password": "securepass123"
 }
-```
 
----
-
-#### 2. Login
-```
-POST /api/login
-```
-**What it does:** Verifies your credentials and logs you in
-
-**Data sent:**
-```json
-{
-    "username": "john",
-    "password": "mypassword"
-}
-```
-
-**Response (success):**
-```json
-{
-    "message": "Login successful",
+Response: {
+    "message": "Login successful.",
     "user": {
         "id": 1,
-        "username": "john",
+        "username": "john_doe",
         "email": "john@comsats.edu.pk",
-        "role": "user"
+        "full_name": "John Doe",
+        "role": "user",
+        "is_active": 1
     }
 }
 ```
 
----
+#### Items
 
-### Items
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/items` | Get all items (with optional filters) |
+| `GET` | `/api/items/:id` | Get single item with claims |
+| `POST` | `/api/items` | Report a new item |
+| `PUT` | `/api/items/:id` | Update an item |
+| `DELETE` | `/api/items/:id` | Delete an item |
 
-#### 3. Get All Items
-```
-GET /api/items
-```
-**What it does:** Fetches all lost/found items
+**GET /api/items?search=phone&status=lost&category=electronics**
 
-**Optional parameters:**
-- `?search=backpack` - Search for items
-- `?status=lost` - Filter by status
+Query parameters:
+- `search` - Search in title, description, location
+- `status` - Filter by "lost" or "found"
+- `category` - Filter by category
 
-**Example:** `GET /api/items?search=phone&status=found`
-
----
-
-#### 4. Report New Item
-```
-POST /api/items
-```
-**What it does:** Adds a new lost/found item
-
-**Data sent:**
+**POST /api/items**
 ```json
-{
-    "title": "Blue Backpack",
-    "description": "Found near library",
-    "category": "bags",
-    "location": "Library",
+Request: {
+    "title": "iPhone 14 Pro",
+    "description": "Space gray with a crack on the back",
+    "category": "electronics",
+    "location": "Library, 2nd Floor",
     "status": "found",
     "reported_by": 1
 }
+
+Response: {
+    "message": "Item reported successfully.",
+    "id": 1
+}
 ```
 
----
+#### Claims
 
-#### 5. Update Item
-```
-PUT /api/items/:id
-```
-**What it does:** Updates an existing item
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/claims` | Submit a claim on an item |
+| `GET` | `/api/claims/pending` | Get pending claims (admin) |
+| `GET` | `/api/claims/user/:userId` | Get user's claims |
+| `PUT` | `/api/claims/:id/review` | Approve/reject claim (admin) |
 
-**Example:** `PUT /api/items/5` updates item with ID 5
+**POST /api/claims**
+```json
+Request: {
+    "item_id": 1,
+    "claimer_id": 2,
+    "proof_text": "The phone has a sticker of a cat on the back case. The screen protector has a small crack on the top left. I lost it on September 10th around 3pm near the library entrance."
+}
 
----
-
-#### 6. Delete Item
-```
-DELETE /api/items/:id
-```
-**What it does:** Removes an item
-
-**Example:** `DELETE /api/items/5` deletes item with ID 5
-
----
-
-### Admin Routes
-
-#### 7. Get All Users
-```
-GET /api/admin/users
-```
-**What it does:** Lists all registered users (admin only)
-
----
-
-#### 8. Delete User
-```
-DELETE /api/admin/users/:id
-```
-**What it does:** Removes a user from the system
-
----
-
-## ⚠️ SQL Injection Vulnerability (INTENTIONAL!)
-
-This application is **INTENTIONALLY vulnerable** to SQL Injection for educational purposes.
-
-### What is SQL Injection?
-
-SQL Injection is when an attacker inserts malicious SQL code into input fields to manipulate the database.
-
-### How to Test
-
-**On the login page, try these:**
-
-1. **Username:** `admin' OR '1'='1`
-   **Password:** `anything`
-   
-   This works because the query becomes:
-   ```sql
-   SELECT * FROM users WHERE username = 'admin' OR '1'='1' AND password = 'anything'
-   ```
-   Since `1=1` is always true, it returns the admin user!
-
-2. **Username:** `' OR '1'='1`
-   **Password:** `' OR '1'='1`
-   
-   This logs you in as the first user in the database.
-
-3. **Username:** `admin' --`
-   **Password:** `anything`
-   
-   The `--` comments out the password check!
-
-### Why is this dangerous?
-
-In a real application, this could allow attackers to:
-- Bypass login without knowing the password
-- View all data in the database
-- Delete or modify data
-- Take over the entire system
-
-### How to fix it (in real apps)?
-
-Always use **parameterized queries**:
-```javascript
-// VULNERABLE (our code):
-const query = `SELECT * FROM users WHERE username = '${username}'`;
-
-// SECURE (how it should be done):
-const query = 'SELECT * FROM users WHERE username = ?';
-db.prepare(query).get(username);  // User input is safely handled
+Response: {
+    "message": "Claim submitted successfully. Awaiting admin review.",
+    "id": 1
+}
 ```
 
----
+**PUT /api/claims/:id/review** (Admin only)
+```json
+Request: {
+    "status": "approved",
+    "admin_note": "Proof is detailed and convincing."
+}
 
-## 🛠️ Technologies Used
+Response: {
+    "message": "Claim approved."
+}
+```
+
+#### Messages
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/messages/:claimId` | Get messages for a claim |
+| `POST` | `/api/messages` | Send a message |
+| `GET` | `/api/messages/contact/:claimId` | Get contact info (approved claims only) |
+
+**POST /api/messages**
+```json
+Request: {
+    "claim_id": 1,
+    "sender_id": 1,
+    "content": "Hi, I found your phone. Where would you like to meet?"
+}
+
+Response: {
+    "message": "Message sent.",
+    "id": 1
+}
+```
+
+#### Admin Routes
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/admin/stats` | Get platform statistics |
+| `GET` | `/api/admin/users` | Get all users |
+| `PUT` | `/api/admin/users/:id` | Update user role/status |
+| `DELETE` | `/api/admin/users/:id` | Delete a user |
+| `GET` | `/api/admin/items` | Get all items |
+| `GET` | `/api/admin/claims` | Get all claims with details |
+
+**GET /api/admin/stats**
+```json
+Response: {
+    "totalItems": 15,
+    "lostItems": 8,
+    "foundItems": 7,
+    "resolvedItems": 3,
+    "totalUsers": 42,
+    "pendingClaims": 2,
+    "totalClaims": 5
+}
+```
+
+## Claim Workflow
+
+```
+1. User A reports a found item
+        |
+        v
+2. User B sees the item and clicks "Claim This Item"
+        |
+        v
+3. User B provides proof of ownership (description, serial number, etc.)
+        |
+        v
+4. Claim status = "pending"
+        |
+        v
+5. Admin reviews the claim in the Admin Panel
+        |
+        v
+6. Admin approves or rejects with a note
+        |
+        +--> If approved:
+        |       - Item marked as "resolved"
+        |       - Contact info revealed to both parties
+        |       - Chat enabled between User A and User B
+        |
+        +--> If rejected:
+                - Claimer can submit a new claim with better proof
+```
+
+## Database Schema
+
+### users
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INTEGER | Primary key |
+| username | TEXT | Unique username |
+| email | TEXT | Unique email |
+| password | TEXT | Plain text password |
+| full_name | TEXT | User's full name |
+| phone | TEXT | Phone number |
+| role | TEXT | "user" or "admin" |
+| is_active | INTEGER | 1 = active, 0 = deactivated |
+| created_at | DATETIME | Account creation date |
+
+### items
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INTEGER | Primary key |
+| title | TEXT | Item title |
+| description | TEXT | Item description |
+| category | TEXT | Category (electronics, bags, etc.) |
+| location | TEXT | Where lost/found |
+| status | TEXT | "lost" or "found" |
+| reported_by | INTEGER | Foreign key to users |
+| is_resolved | INTEGER | 1 = item claimed and resolved |
+| date_reported | DATETIME | Report date |
+
+### claims
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INTEGER | Primary key |
+| item_id | INTEGER | Foreign key to items |
+| claimer_id | INTEGER | Foreign key to users |
+| proof_text | TEXT | Proof of ownership |
+| status | TEXT | "pending", "approved", or "rejected" |
+| admin_note | TEXT | Admin's note |
+| created_at | DATETIME | Claim submission date |
+| reviewed_at | DATETIME | Review date |
+
+### messages
+| Column | Type | Description |
+|--------|------|-------------|
+| id | INTEGER | Primary key |
+| claim_id | INTEGER | Foreign key to claims |
+| sender_id | INTEGER | Foreign key to users |
+| content | TEXT | Message content |
+| created_at | DATETIME | Message date |
+
+## Security
+
+- **SQL Injection:** All database queries use parameterized statements (no string concatenation)
+- **Input Validation:** Required fields are validated on both client and server
+- **Access Control:** Admin routes verify the user's role
+- **Contact Info Protection:** Phone/email only revealed after admin-approved claim
+
+## Technologies
 
 - **Backend:** Node.js, Express.js
-- **Database:** SQLite (via better-sqlite3)
-- **Frontend:** HTML, CSS, JavaScript
-- **Styling:** Custom CSS (dark theme)
-
----
-
-## 📝 Notes
-
-- The database file (`lost_and_found.db`) is created automatically on first run
-- All passwords are stored in plain text (intentionally insecure for demo)
-- The admin account cannot be deleted
-- Check the server console to see SQL queries being executed
+- **Database:** SQLite (via sql.js)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
+- **Styling:** Custom CSS with CSS variables for theming

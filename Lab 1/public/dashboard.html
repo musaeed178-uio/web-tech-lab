@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,132 +7,194 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="dashboard">
-        <nav class="navbar">
-            <div class="nav-brand">🎓 COMSATS Lost & Found</div>
-            <div class="nav-user">
-                <span id="user-display"></span>
-                <button onclick="goToAdmin()" id="admin-btn" class="btn btn-small btn-admin" style="display:none;">Admin Panel</button>
-                <button onclick="handleLogout()" class="btn btn-small btn-logout">Sign Out</button>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
             </div>
-        </nav>
+            COMSATS Lost & Found
+        </div>
+        <div class="nav-links">
+            <span class="nav-user" id="user-display"></span>
+            <button class="theme-toggle-inline btn-icon" onclick="toggleTheme()" title="Toggle theme">
+                <span id="theme-icon">&#9790;</span>
+            </button>
+            <a href="/dashboard" class="btn btn-sm btn-secondary">Dashboard</a>
+            <a href="/" class="btn btn-sm btn-secondary" onclick="handleLogout()">Sign Out</a>
+        </div>
+    </nav>
 
-        <div class="main-content">
-            <!-- Report Item Section -->
-            <div class="card report-card">
-                <h2>📋 Report an Item</h2>
-                <form onsubmit="reportItem(event)">
+    <div class="main-content">
+        <!-- Report Form -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Report an Item</h2>
+            </div>
+            <form onsubmit="reportItem(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Item Title *</label>
+                        <input type="text" id="item-title" placeholder="e.g., Blue Backpack, iPhone 14" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="item-category">
+                            <option value="electronics">Electronics</option>
+                            <option value="bags">Bags & Purses</option>
+                            <option value="documents">Documents & IDs</option>
+                            <option value="clothing">Clothing & Accessories</option>
+                            <option value="keys">Keys</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="item-description" placeholder="Describe the item (color, brand, distinguishing features...)" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Location Found/Lost</label>
+                        <input type="text" id="item-location" placeholder="e.g., Library, C-Block, Cafeteria">
+                    </div>
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="item-status" required>
+                            <option value="lost">I Lost This</option>
+                            <option value="found">I Found This</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: auto;">Submit Report</button>
+            </form>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search items by title, description, or location..." oninput="searchItems()">
+            <select id="filter-status" onchange="searchItems()">
+                <option value="">All Status</option>
+                <option value="lost">Lost</option>
+                <option value="found">Found</option>
+            </select>
+            <select id="filter-category" onchange="searchItems()">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="bags">Bags</option>
+                <option value="documents">Documents</option>
+                <option value="clothing">Clothing</option>
+                <option value="keys">Keys</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Items List -->
+        <div class="card">
+            <div class="card-header">
+                <h2>Recent Reports</h2>
+            </div>
+            <div id="items-list" class="items-grid"></div>
+            <p id="no-items" class="no-items" style="display:none;">No items match your search criteria.</p>
+        </div>
+    </div>
+
+    <!-- Report Item Modal -->
+    <div id="report-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Report</h3>
+                <button class="modal-close" onclick="closeModal('report-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="updateItem(event)">
+                    <input type="hidden" id="edit-id">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="edit-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="edit-description" rows="2"></textarea>
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Item Title</label>
-                            <input type="text" id="item-title" placeholder="e.g., Blue Backpack" required>
-                        </div>
-                        <div class="form-group">
                             <label>Category</label>
-                            <select id="item-category" required>
-                                <option value="">Select category</option>
+                            <select id="edit-category">
                                 <option value="electronics">Electronics</option>
                                 <option value="bags">Bags & Purses</option>
-                                <option value="documents">Documents</option>
-                                <option value="clothing">Clothing</option>
-                                <option value="id-cards">ID Cards</option>
+                                <option value="documents">Documents & IDs</option>
+                                <option value="clothing">Clothing & Accessories</option>
                                 <option value="keys">Keys</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea id="item-description" placeholder="Describe the item..." rows="2"></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Location</label>
-                            <input type="text" id="item-location" placeholder="e.g., Library, C-block">
-                        </div>
                         <div class="form-group">
                             <label>Status</label>
-                            <select id="item-status" required>
+                            <select id="edit-status">
                                 <option value="lost">Lost</option>
                                 <option value="found">Found</option>
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Report Item</button>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="edit-location">
+                    </div>
+                    <div class="modal-footer" style="padding:0; border:none; margin-top:16px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('report-modal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary" style="width:auto;">Save Changes</button>
+                    </div>
                 </form>
             </div>
+        </div>
+    </div>
 
-            <!-- Search & Filter -->
-            <div class="card search-card">
-                <div class="search-row">
-                    <input type="text" id="search-input" placeholder="🔍 Search items..." oninput="searchItems()">
-                    <select id="filter-status" onchange="searchItems()">
-                        <option value="">All Status</option>
-                        <option value="lost">Lost</option>
-                        <option value="found">Found</option>
-                        <option value="claimed">Claimed</option>
-                    </select>
-                </div>
+    <!-- Claim Modal -->
+    <div id="claim-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Claim This Item</h3>
+                <button class="modal-close" onclick="closeModal('claim-modal')">&times;</button>
             </div>
-
-            <!-- Items List -->
-            <div class="card">
-                <h2>📦 Recent Items</h2>
-                <div id="items-list" class="items-grid">
-                    <!-- Items will be loaded here -->
-                </div>
-                <p id="no-items" class="no-items" style="display:none;">No items found.</p>
+            <div class="modal-body">
+                <p style="font-size:14px; color:var(--text-secondary); margin-bottom:16px;">
+                    Provide proof of ownership. Be as detailed as possible. An admin will review your claim.
+                </p>
+                <form onsubmit="submitClaim(event)">
+                    <input type="hidden" id="claim-item-id">
+                    <div class="form-group">
+                        <label>Proof of Ownership *</label>
+                        <textarea id="claim-proof" rows="4" placeholder="Describe details only the owner would know: serial number, engravings, stickers, where you bought it, when you lost it, etc." required></textarea>
+                    </div>
+                    <div class="modal-footer" style="padding:0; border:none; margin-top:16px;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('claim-modal')">Cancel</button>
+                        <button type="submit" class="btn btn-success" style="width:auto;">Submit Claim</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Edit Modal -->
-    <div id="edit-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Edit Item</h2>
-            <form onsubmit="updateItem(event)">
-                <input type="hidden" id="edit-id">
-                <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" id="edit-title" required>
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea id="edit-description" rows="2"></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select id="edit-category">
-                            <option value="electronics">Electronics</option>
-                            <option value="bags">Bags & Purses</option>
-                            <option value="documents">Documents</option>
-                            <option value="clothing">Clothing</option>
-                            <option value="id-cards">ID Cards</option>
-                            <option value="keys">Keys</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select id="edit-status">
-                            <option value="lost">Lost</option>
-                            <option value="found">Found</option>
-                            <option value="claimed">Claimed</option>
-                        </select>
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="chat-title">Messages</h3>
+                <button class="modal-close" onclick="closeModal('chat-modal')">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:0;">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="chat-input">
+                        <input type="text" id="chat-input" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendMessage()">
+                        <button class="btn btn-primary btn-sm" onclick="sendMessage()" style="width:auto;">Send</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" id="edit-location">
-                </div>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </form>
+            </div>
         </div>
     </div>
 
-    <div id="message" class="message"></div>
+    <div id="toast" class="toast"></div>
 
     <script src="js/dashboard.js"></script>
 </body>

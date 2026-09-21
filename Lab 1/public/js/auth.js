@@ -1,91 +1,115 @@
-const API_URL = 'http://localhost:3000/api';
+const API = '';
 
-// Check if user is already logged in
-window.onload = function() {
-    const user = localStorage.getItem('user');
-    if (user) {
-        window.location.href = '/dashboard';
-    }
-};
+// Theme
+function initTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateThemeButton(saved);
+}
 
-// Tab switching
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeButton(next);
+}
+
+function updateThemeButton(theme) {
+    const icon = document.getElementById('theme-icon');
+    const label = document.getElementById('theme-label');
+    if (icon) icon.textContent = theme === 'dark' ? '\u263C' : '\u263E';
+    if (label) label.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+}
+
+function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => { toast.className = 'toast'; }, 3000);
+}
+
 function showTab(tab) {
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
-    
+    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
     if (tab === 'login') {
-        document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+        document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
         document.getElementById('login-form').classList.add('active');
     } else {
-        document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+        document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
         document.getElementById('signup-form').classList.add('active');
     }
 }
 
-// Show message
-function showMessage(text, type) {
-    const msg = document.getElementById('message');
-    msg.textContent = text;
-    msg.className = 'message ' + type;
-    setTimeout(() => {
-        msg.className = 'message';
-    }, 3000);
-}
-
-// Login handler
 async function handleLogin(e) {
     e.preventDefault();
-    
+    const btn = document.getElementById('login-btn');
+    btn.disabled = true;
+    btn.textContent = 'Signing in...';
+
     const username = document.getElementById('login-username').value;
     const password = document.getElementById('login-password').value;
-    
+
     try {
-        const response = await fetch(`${API_URL}/login`, {
+        const res = await fetch(`${API}/api/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
+        const data = await res.json();
+
+        if (res.ok) {
             localStorage.setItem('user', JSON.stringify(data.user));
-            showMessage('Login successful! Redirecting...', 'success');
-            setTimeout(() => {
-                window.location.href = '/dashboard';
-            }, 1000);
+            showToast('Login successful. Redirecting...', 'success');
+            setTimeout(() => { window.location.href = '/dashboard'; }, 800);
         } else {
-            showMessage(data.error || 'Login failed', 'error');
+            showToast(data.error || 'Login failed.', 'error');
         }
-    } catch (error) {
-        showMessage('Connection error. Is the server running?', 'error');
+    } catch (err) {
+        showToast('Connection error. Is the server running?', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
     }
 }
 
-// Signup handler
 async function handleSignup(e) {
     e.preventDefault();
-    
+    const btn = document.getElementById('signup-btn');
+    btn.disabled = true;
+    btn.textContent = 'Creating account...';
+
     const username = document.getElementById('signup-username').value;
+    const full_name = document.getElementById('signup-fullname').value;
     const email = document.getElementById('signup-email').value;
+    const phone = document.getElementById('signup-phone').value;
     const password = document.getElementById('signup-password').value;
-    
+
     try {
-        const response = await fetch(`${API_URL}/signup`, {
+        const res = await fetch(`${API}/api/signup`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, email, password })
+            body: JSON.stringify({ username, email, password, full_name, phone })
         });
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            showMessage('Account created! You can now sign in.', 'success');
+        const data = await res.json();
+
+        if (res.ok) {
+            showToast('Account created. You can now sign in.', 'success');
             showTab('login');
         } else {
-            showMessage(data.error || 'Signup failed', 'error');
+            showToast(data.error || 'Signup failed.', 'error');
         }
-    } catch (error) {
-        showMessage('Connection error. Is the server running?', 'error');
+    } catch (err) {
+        showToast('Connection error.', 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
     }
 }
+
+// Init
+initTheme();
+window.onload = function() {
+    const user = localStorage.getItem('user');
+    if (user) window.location.href = '/dashboard';
+};

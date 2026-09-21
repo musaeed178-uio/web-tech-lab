@@ -1,150 +1,150 @@
-const API_URL = 'http://localhost:3000/api';
+const API = '';
 let currentUser = null;
 
-// Check authentication
+// Theme
+function initTheme() {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    const icon = document.getElementById('theme-icon');
+    if (icon) icon.textContent = saved === 'dark' ? '\u263C' : '\u263E';
+}
+
+function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('theme-icon').textContent = next === 'dark' ? '\u263C' : '\u263E';
+}
+
+function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => { toast.className = 'toast'; }, 3000);
+}
+
+function escapeHtml(text) {
+    const d = document.createElement('div');
+    d.textContent = text || '';
+    return d.innerHTML;
+}
+
 window.onload = function() {
     const user = localStorage.getItem('user');
-    if (!user) {
-        window.location.href = '/';
-        return;
-    }
+    if (!user) { window.location.href = '/'; return; }
     currentUser = JSON.parse(user);
-    document.getElementById('user-display').textContent = `👤 ${currentUser.username}`;
-    
-    // Show admin button for admin users
-    if (currentUser.role === 'admin') {
-        document.getElementById('admin-btn').style.display = 'inline-block';
-    }
-    
+    document.getElementById('user-display').textContent = currentUser.full_name || currentUser.username;
+    initTheme();
     loadItems();
 };
 
-// Logout
 function handleLogout() {
     localStorage.removeItem('user');
     window.location.href = '/';
 }
 
-// Go to admin panel
-function goToAdmin() {
-    window.location.href = '/admin';
-}
-
-// Show message
-function showMessage(text, type) {
-    const msg = document.getElementById('message');
-    msg.textContent = text;
-    msg.className = 'message ' + type;
-    setTimeout(() => {
-        msg.className = 'message';
-    }, 3000);
-}
-
-// Load items
-async function loadItems(search = '', status = '') {
+async function loadItems(search, status, category) {
     try {
-        let url = `${API_URL}/items?`;
-        if (search) url += `search=${search}&`;
-        if (status) url += `status=${status}`;
-        
-        const response = await fetch(url);
-        const items = await response.json();
-        
+        let url = `${API}/api/items?`;
+        const params = new URLSearchParams();
+        if (search) params.set('search', search);
+        if (status) params.set('status', status);
+        if (category) params.set('category', category);
+        url += params.toString();
+
+        const res = await fetch(url);
+        const items = await res.json();
         const container = document.getElementById('items-list');
         const noItems = document.getElementById('no-items');
-        
+
         if (items.length === 0) {
             container.innerHTML = '';
             noItems.style.display = 'block';
             return;
         }
-        
+
         noItems.style.display = 'none';
         container.innerHTML = items.map(item => `
-            <div class="item-card">
-                <div class="item-header">
-                    <span class="item-title">${escapeHtml(item.title)}</span>
-                    <span class="item-status status-${item.status}">${item.status}</span>
+            <div class="item-card" onclick="window.location.href='/item/${item.id}'">
+                <div class="item-card-header">
+                    <span class="item-card-title">${escapeHtml(item.title)}</span>
+                    <span class="badge badge-${item.status}">${item.status}</span>
                 </div>
-                <p class="item-desc">${escapeHtml(item.description || 'No description')}</p>
-                <div class="item-meta">
-                    <span>📍 ${escapeHtml(item.location || 'Unknown')}</span>
-                    <span>📂 ${escapeHtml(item.category || 'Other')}</span>
-                    <span>👤 ${escapeHtml(item.reporter || 'Anonymous')}</span>
+                <p class="item-card-desc">${escapeHtml(item.description || 'No description provided.')}</p>
+                <div class="item-card-meta">
+                    <span>${escapeHtml(item.location || 'Unknown location')}</span>
+                    <span>${escapeHtml(item.category || 'Other')}</span>
+                    <span>by ${escapeHtml(item.reporter_name || 'Anonymous')}</span>
                 </div>
+                ${item.status === 'found' && currentUser.id !== item.reported_by ? `
+                <div class="item-card-actions">
+                    <button class="btn btn-success btn-sm" onclick="event.stopPropagation(); openClaimModal(${item.id})">Claim This Item</button>
+                </div>
+                ` : ''}
                 ${currentUser.id === item.reported_by || currentUser.role === 'admin' ? `
-                <div class="item-actions">
-                    <button class="btn btn-edit" onclick="editItem(${item.id}, '${escapeAttr(item.title)}', '${escapeAttr(item.description || '')}', '${escapeAttr(item.category)}', '${escapeAttr(item.location)}', '${item.status}')">Edit</button>
-                    <button class="btn btn-delete" onclick="deleteItem(${item.id})">Delete</button>
+                <div class="item-card-actions">
+                    <button class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); openEditModal(${item})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="event.stopPropagation(); deleteItem(${item.id})">Delete</button>
                 </div>
                 ` : ''}
             </div>
         `).join('');
-    } catch (error) {
-        console.error('Error loading items:', error);
+    } catch (err) {
+        console.error('Error loading items:', err);
     }
 }
 
-// Search items
 function searchItems() {
     const search = document.getElementById('search-input').value;
     const status = document.getElementById('filter-status').value;
-    loadItems(search, status);
+    const category = document.getElementById('filter-category').value;
+    loadItems(search, status, category);
 }
 
-// Report new item
 async function reportItem(e) {
     e.preventDefault();
-    
     const item = {
         title: document.getElementById('item-title').value,
         description: document.getElementById('item-description').value,
         category: document.getElementById('item-category').value,
         location: document.getElementById('item-location').value,
         status: document.getElementById('item-status').value,
-        reported_by: currentUser.id,
-        image_url: ''
+        reported_by: currentUser.id
     };
-    
+
     try {
-        const response = await fetch(`${API_URL}/items`, {
+        const res = await fetch(`${API}/api/items`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item)
         });
-        
-        if (response.ok) {
-            showMessage('Item reported successfully!', 'success');
+
+        if (res.ok) {
+            showToast('Item reported successfully.', 'success');
             e.target.reset();
             loadItems();
         } else {
-            showMessage('Failed to report item', 'error');
+            const data = await res.json();
+            showToast(data.error || 'Failed to report item.', 'error');
         }
-    } catch (error) {
-        showMessage('Connection error', 'error');
+    } catch (err) {
+        showToast('Connection error.', 'error');
     }
 }
 
-// Edit item - open modal
-function editItem(id, title, description, category, location, status) {
-    document.getElementById('edit-id').value = id;
-    document.getElementById('edit-title').value = title;
-    document.getElementById('edit-description').value = description;
-    document.getElementById('edit-category').value = category;
-    document.getElementById('edit-location').value = location;
-    document.getElementById('edit-status').value = status;
-    document.getElementById('edit-modal').classList.add('active');
+function openEditModal(item) {
+    document.getElementById('edit-id').value = item.id;
+    document.getElementById('edit-title').value = item.title;
+    document.getElementById('edit-description').value = item.description || '';
+    document.getElementById('edit-category').value = item.category;
+    document.getElementById('edit-location').value = item.location || '';
+    document.getElementById('edit-status').value = item.status;
+    document.getElementById('report-modal').classList.add('active');
 }
 
-// Close modal
-function closeModal() {
-    document.getElementById('edit-modal').classList.remove('active');
-}
-
-// Update item
 async function updateItem(e) {
     e.preventDefault();
-    
     const id = document.getElementById('edit-id').value;
     const item = {
         title: document.getElementById('edit-title').value,
@@ -153,53 +153,70 @@ async function updateItem(e) {
         location: document.getElementById('edit-location').value,
         status: document.getElementById('edit-status').value
     };
-    
+
     try {
-        const response = await fetch(`${API_URL}/items/${id}`, {
+        const res = await fetch(`${API}/api/items/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(item)
         });
-        
-        if (response.ok) {
-            showMessage('Item updated successfully!', 'success');
-            closeModal();
+
+        if (res.ok) {
+            showToast('Item updated.', 'success');
+            closeModal('report-modal');
             loadItems();
-        } else {
-            showMessage('Failed to update item', 'error');
         }
-    } catch (error) {
-        showMessage('Connection error', 'error');
+    } catch (err) {
+        showToast('Connection error.', 'error');
     }
 }
 
-// Delete item
 async function deleteItem(id) {
-    if (!confirm('Are you sure you want to delete this item?')) return;
-    
+    if (!confirm('Are you sure you want to delete this report?')) return;
     try {
-        const response = await fetch(`${API_URL}/items/${id}`, {
-            method: 'DELETE'
-        });
-        
-        if (response.ok) {
-            showMessage('Item deleted successfully!', 'success');
+        const res = await fetch(`${API}/api/items/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+            showToast('Item deleted.', 'success');
             loadItems();
-        } else {
-            showMessage('Failed to delete item', 'error');
         }
-    } catch (error) {
-        showMessage('Connection error', 'error');
+    } catch (err) {
+        showToast('Connection error.', 'error');
     }
 }
 
-// Helper functions
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+function openClaimModal(itemId) {
+    document.getElementById('claim-item-id').value = itemId;
+    document.getElementById('claim-proof').value = '';
+    document.getElementById('claim-modal').classList.add('active');
 }
 
-function escapeAttr(text) {
-    return text.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+async function submitClaim(e) {
+    e.preventDefault();
+    const claim = {
+        item_id: parseInt(document.getElementById('claim-item-id').value),
+        claimer_id: currentUser.id,
+        proof_text: document.getElementById('claim-proof').value
+    };
+
+    try {
+        const res = await fetch(`${API}/api/claims`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(claim)
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+            showToast('Claim submitted. Awaiting admin review.', 'success');
+            closeModal('claim-modal');
+        } else {
+            showToast(data.error || 'Failed to submit claim.', 'error');
+        }
+    } catch (err) {
+        showToast('Connection error.', 'error');
+    }
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
 }
