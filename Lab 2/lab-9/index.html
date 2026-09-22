@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 09: Accessibility and SEO with Semantic HTML -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CUI Wah Campus - COMSATS University Islamabad Wah Campus official page with programs, facilities, and student information">
+    <meta name="keywords" content="COMSATS, CUI, Wah Campus, Computer Science, University, Education">
+    <meta name="author" content="CUI Wah Campus">
+    <title>CUI Wah Campus - Accessible & SEO Optimized</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.7; color: #111; }
+        /* Skip Link - for keyboard/screen reader users */
+        .skip-link { position: absolute; top: -40px; left: 0; background: #1a2332; color: white; padding: 8px 16px; z-index: 100; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+        header { background: #1a2332; color: white; padding: 16px 24px; }
+        nav { background: #2d3f54; padding: 12px 24px; }
+        nav a { color: #ccc; text-decoration: none; margin-right: 16px; }
+        nav a:hover, nav a:focus { color: white; text-decoration: underline; }
+        main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        section { margin-bottom: 30px; }
+        footer { background: #1a2332; color: #9ca3af; text-align: center; padding: 16px; font-size: 13px; }
+        a:focus, button:focus, input:focus { outline: 3px solid #3b82f6; outline-offset: 2px; }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <!-- Skip Link: Allows keyboard users to skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <h1>CUI Wah Campus</h1>
+        <p>COMSATS University Islamabad - Wah Campus</p>
+    </header>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#programs">Programs</a>
+        <a href="#facilities">Facilities</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- MAIN: Primary content with landmark role -->
+    <main id="main-content" role="main">
+
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading">About CUI Wah Campus</h2>
+            <p>
+                COMSATS University Islamabad, Wah Campus provides quality education in
+                a modern learning environment. Our campus is equipped with state-of-the-art
+                facilities and experienced faculty members.
+            </p>
+            <img src="https://via.placeholder.com/400x200/1a2332/ffffff?text=CUI+Campus" 
+                 alt="COMSATS University Wah Campus main building with green lawns and modern architecture" 
+                 width="400" height="200">
+        </section>
+
+        <section id="programs" aria-labelledby="programs-heading">
+            <h2 id="programs-heading">Academic Programs</h2>
+
+            <article aria-labelledby="cs-heading">
+                <h3 id="cs-heading">BS Computer Science</h3>
+                <p>
+                    A comprehensive 4-year program covering programming, algorithms,
+                    data structures, databases, and software engineering.
+                </p>
+            </article>
+
+            <article aria-labelledby="se-heading">
+                <h3 id="se-heading">BS Software Engineering</h3>
+                <p>
+                    A 4-year program focused on software development lifecycle,
+                    quality assurance, and project management.
+                </p>
+            </article>
+        </section>
+
+        <section id="facilities" aria-labelledby="facilities-heading">
+            <h2 id="facilities-heading">Campus Facilities</h2>
+            <ul>
+                <li>Modern Computer Laboratories</li>
+                <li>University Library with digital resources</li>
+                <li>High-speed internet across campus</li>
+                <li>Cafeteria and food court</li>
+                <li>Sports complex and gymnasium</li>
+            </ul>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact Information</h2>
+            <address>
+                <p><strong>Address:</strong> COMSATS University Islamabad, Park Road, Chak Shahzad, Islamabad 45550</p>
+                <p><strong>Phone:</strong> <a href="tel:+92518157218">+92-51-8157218</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@comsats.edu.pk">info@comsats.edu.pk</a></p>
+            </address>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 COMSATS University Islamabad, Wah Campus. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

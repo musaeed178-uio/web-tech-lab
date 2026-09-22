@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 04: Images, Audio and Video -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUI Wah Campus - Media Page</title>
+</head>
+<body>
+
+    <h1>CUI Wah Campus Media Page</h1>
+
+    <p>This page demonstrates embedding images, audio, and video using HTML5.</p>
+
+    <hr>
+
+    <!-- Image Section -->
+    <h2>Campus Images</h2>
+
+    <figure>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY4Uhh_W-HSlEYonHrjtQuEkYqQd25b3f-4K10zPc12z37_GMAN-G4Rftp&s=10" 
+             alt="Main academic building of COMSATS University Wah Campus with modern architecture" 
+             width="400" height="250">
+        <figcaption>The main academic building at CUI Wah Campus</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://cuiwah.edu.pk/assets/img/faculties.jpg" 
+             alt="Students working in the computer laboratory with latest equipment" 
+             width="400" height="250">
+        <figcaption>Computer laboratory with modern equipment</figcaption>
+    </figure>
+
+    <hr>
+
+    <!-- Audio Section -->
+    <h2>Campus Audio</h2>
+
+    <p>Listen to some random nonsense that wouldn't even run because it's referencing a non existing file:</p>
+
+    <figure>
+        <audio controls>
+            <source src="campus-anthem.mp3" type="audio/mpeg">
+            <source src="campus-anthem.ogg" type="audio/ogg">
+            Your browser does not support the audio element. Please update your browser to listen to the audio.
+        </audio>
+        <figcaption>Yeah, my mooscles is geeting stroonger, My mooscles, it's geeting beegar, yeahhhhhh</figcaption>
+    </figure>
+
+    <hr>
+
+    <!-- Video Section -->
+    <h2>Campus Video Tour</h2>
+
+    <p>Take a virtual tour of our campus:</p>
+
+    <figure>
+        <video controls width="640" height="360">
+            <source src="https://www.youtube.com/watch?v=8FrSwfGEFkI" >
+            <source src="https://www.youtube.com/watch?v=8FrSwfGEFkI" >
+            Your browser does not support the video element. Please update your browser to watch the video.
+        </video>
+        <figcaption>Virtual tour of CUI Wah Campus</figcaption>
+    </figure>
+
+    <hr>
+
+    <h2>Media Attributes Tested</h2>
+    <ul>
+        <li><strong>controls</strong> - Shows play/pause/volume controls</li>
+        <li><strong>width/height</strong> - Sets video dimensions</li>
+        <li><strong>alt text</strong> - Describes images for screen readers</li>
+        <li><strong>figure/figcaption</strong> - Provides captions for media</li>
+        <li><strong>source</strong> - Allows multiple format fallbacks</li>
+    </ul>
+
+    <hr>
+    <p><small>&copy; 2026 CUI Wah Campus</small></p>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 06: HTML5 Elements, Attributes and Browser Support -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Features Demo - CUI Wah</title>
+</head>
+<body>
+
+    <h1>HTML5 Features Demonstration</h1>
+
+    <p>This page demonstrates various HTML5 features and their browser support.</p>
+
+    <hr>
+
+    <!-- Feature 1: Details/Summary -->
+    <h2>1. Details and Summary</h2>
+    <details>
+        <summary>Click to expand - What is HTML5?</summary>
+        <p>HTML5 is the fifth and current major version of HTML. It provides new elements, attributes, and APIs for building modern web applications.</p>
+    </details>
+
+    <details>
+        <summary>Click to expand - What are the new features in HTML5?</summary>
+        <p>HTML5 introduced semantic elements like header, nav, main, section, article, footer. It also added audio, video, canvas, and form improvements.</p>
+    </details>
+
+    <hr>
+
+    <!-- Feature 2: Progress -->
+    <h2>2. Progress Bar</h2>
+    <p>Course Completion Progress:</p>
+    <progress value="70" max="100">70%</progress>
+    <p>70% of the course has been completed.</p>
+
+    <hr>
+
+    <!-- Feature 3: Meter -->
+    <h2>3. Meter Element</h2>
+    <p>Student GPA:</p>
+    <meter value="3.5" min="0" max="4.0" low="2.0" high="3.5" optimum="4.0">3.5</meter>
+    <p>GPA: 3.5 out of 4.0</p>
+
+    <hr>
+
+    <!-- Feature 4: Time -->
+    <h2>4. Time Element</h2>
+    <p>Lab Session: <time datetime="2026-09-22">September 22, 2026</time></p>
+    <p>Class Time: <time datetime="09:00">9:00 AM</time></p>
+    <p>Submission Deadline: <time datetime="2026-09-30T23:59:00">September 30, 2026 at 11:59 PM</time></p>
+
+    <hr>
+
+    <!-- Feature 5: Figure/Figcaption -->
+    <h2>5. Figure and Figcaption</h2>
+    <figure>
+        <img src="https://via.placeholder.com/300x200/1a2332/ffffff?text=CUI+Campus" 
+             alt="CUI Wah Campus main building" width="300" height="200">
+        <figcaption>Figure 1: Main building of COMSATS University Wah Campus</figcaption>
+    </figure>
+
+    <hr>
+
+    <!-- Feature 6: Dialog -->
+    <h2>6. Dialog Element</h2>
+    <p>Click the button to open a dialog box:</p>
+    <dialog id="myDialog">
+        <p>This is a native HTML5 dialog element!</p>
+        <p>It can be used for modals and popups.</p>
+        <button onclick="document.getElementById('myDialog').close()">Close</button>
+    </dialog>
+    <button onclick="document.getElementById('myDialog').showModal()">Open Dialog</button>
+
+    <hr>
+
+    <!-- Feature 7: Mark -->
+    <h2>7. Mark Element (Highlight)</h2>
+    <p>This is some <mark>highlighted text</mark> using the HTML5 mark element.</p>
+
+    <hr>
+
+    <!-- Feature 8: Output -->
+    <h2>8. Output Element</h2>
+    <form oninput="result.value = parseInt(a.value) + parseInt(b.value)">
+        <input type="number" id="a" value="0" style="width:60px;"> +
+        <input type="number" id="b" value="0" style="width:60px;"> =
+        <output name="result" for="a b">0</output>
+    </form>
+
+    <hr>
+
+    <h2>Browser Support Notes</h2>
+    <ul>
+        <li><strong>details/summary</strong> - Supported in all modern browsers</li>
+        <li><strong>progress</strong> - Supported in all modern browsers</li>
+        <li><strong>meter</strong> - Supported in all modern browsers (except IE)</li>
+        <li><strong>time</strong> - Supported in all modern browsers</li>
+        <li><strong>dialog</strong> - Supported in Chrome, Edge, Firefox (not Safari until 2022)</li>
+    </ul>
+
+    <hr>
+    <p><small>&copy; 2026 CUI Wah Campus</small></p>
+
+</body>
+</html>

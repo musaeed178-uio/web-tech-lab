@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 07: Block-Level vs Inline Elements, div and span -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Block vs Inline</title>
+    <style>
+        /* Simple CSS to visualize block vs inline */
+        .block-demo { background: #e2e8f0; border: 2px solid #94a3b8; padding: 10px; margin: 8px 0; }
+        .inline-demo { background: #dbeafe; border: 2px solid #60a5fa; padding: 4px 8px; margin: 4px; }
+        .section-box { border: 1px solid #ccc; padding: 16px; margin: 16px 0; background: #fafafa; }
+        .status { font-size: 12px; padding: 2px 6px; border-radius: 3px; }
+        .active { background: #dcfce7; color: #166534; }
+        .pending { background: #fef3c7; color: #92400e; }
+        .course-type { font-size: 11px; background: #ede9fe; color: #5b21b6; padding: 2px 6px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Student Dashboard</h1>
+    <p>This page demonstrates block-level vs inline elements, and the use of div and span.</p>
+
+    <hr>
+
+    <!-- BLOCK-LEVEL ELEMENTS -->
+    <h2>Block-Level Elements</h2>
+    <p>Block-level elements take up the full width and start on a new line:</p>
+
+    <div class="block-demo">
+        This is a div element. It is block-level, so it takes full width.
+    </div>
+    <div class="block-demo">
+        This is another div. It starts on a new line below the first one.
+    </div>
+
+    <hr>
+
+    <!-- STUDENT PROFILE - using div for grouping -->
+    <h2>Student Profile (Using div for grouping)</h2>
+
+    <div class="section-box">
+        <h3>Personal Details</h3>
+        <p><strong>Name:</strong> Ahmed Raza</p>
+        <p><strong>Roll Number:</strong> SP23-BCS-041</p>
+        <p><strong>Program:</strong> BS Computer Science</p>
+        <p><strong>Status:</strong> <span class="status active">Active</span></p>
+    </div>
+
+    <div class="section-box">
+        <h3>Current Courses</h3>
+        <p>
+            <span class="course-type">Core</span> Data Structures and Algorithms
+            <span class="status active">Enrolled</span>
+        </p>
+        <p>
+            <span class="course-type">Core</span> Database Systems
+            <span class="status active">Enrolled</span>
+        </p>
+        <p>
+            <span class="course-type">Elective</span> Web Development
+            <span class="status active">Enrolled</span>
+        </p>
+        <p>
+            <span class="course-type">Core</span> Operating Systems
+            <span class="status pending">Pending</span>
+        </p>
+    </div>
+
+    <div class="section-box">
+        <h3>Announcements</h3>
+        <p><strong>Midterm Exam:</strong> Scheduled for October 15-20, 2026</p>
+        <p><strong>Holiday:</strong> October 23-24 (Eid Milad-un-Nabi)</p>
+        <p><strong>Assignment:</strong> Web Development Lab 3 due September 30</p>
+    </div>
+
+    <hr>
+
+    <!-- INLINE ELEMENTS -->
+    <h2>Inline Elements</h2>
+    <p>Inline elements only take up as much width as needed and do not start on a new line:</p>
+
+    <div class="block-demo">
+        <p>This is a paragraph containing <span class="inline-demo">inline span 1</span>, 
+        <span class="inline-demo">inline span 2</span>, and <span class="inline-demo">inline span 3</span>. 
+        Notice how they all stay on the same line because span is an inline element.</p>
+    </div>
+
+    <p>More inline examples: <strong>Bold text</strong>, <em>Italic text</em>, 
+    <mark>Highlighted text</mark>, and <small>Small text</small> are all inline elements.</p>
+
+    <hr>
+
+    <!-- Quick Links - using div for layout -->
+    <h2>Quick Links</h2>
+
+    <div class="section-box">
+        <h3>Academic</h3>
+        <p><a href="#">View Grades</a></p>
+        <p><a href="#">Course Registration</a></p>
+        <p><a href="#">Academic Calendar</a></p>
+    </div>
+
+    <div class="section-box">
+        <h3>Services</h3>
+        <p><a href="#">Library Portal</a></p>
+        <p><a href="#">IT Help Desk</a></p>
+        <p><a href="#">Student Email</a></p>
+    </div>
+
+    <hr>
+
+    <h2>Block vs Inline Summary</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Block-Level Elements</th>
+                <th>Inline Elements</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>div, h1-h6, p, ul, ol, li, table, form</td>
+                <td>span, strong, em, a, mark, small, img</td>
+            </tr>
+            <tr>
+                <td>Take full width, start on new line</td>
+                <td>Take only needed width, stay on same line</td>
+            </tr>
+            <tr>
+                <td>Can contain inline elements</td>
+                <td>Cannot contain block-level elements</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <p><small>&copy; 2026 CUI Wah Campus</small></p>
+
+</body>
+</html>

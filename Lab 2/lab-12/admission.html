@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 12: Integrated Project - Admission & Contact Page -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admission information and contact details for CUI Wah Campus">
+    <title>Admission & Contact - CUI Wah Campus</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #111; }
+        header { background: #1a2332; color: white; padding: 16px 24px; }
+        header h1 { font-size: 20px; }
+        nav { background: #2d3f54; padding: 10px 24px; }
+        nav a { color: #ccc; text-decoration: none; margin-right: 16px; font-size: 14px; }
+        nav a:hover { color: white; text-decoration: underline; }
+        main { max-width: 960px; margin: 0 auto; padding: 30px 24px; }
+        section { margin-bottom: 30px; }
+        fieldset { border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        legend { font-weight: bold; padding: 0 8px; color: #1a2332; }
+        label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; margin-bottom: 6px; }
+        small { color: #666; display: block; margin-bottom: 14px; }
+        button { padding: 10px 20px; border: none; border-radius: 4px; font-size: 14px; cursor: pointer; background: #2563eb; color: white; margin-right: 8px; }
+        .btn-reset { background: #e5e7eb; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; font-size: 14px; }
+        th { background: #f3f4f6; }
+        aside { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px; margin: 16px 0; }
+        footer { background: #1a2332; color: #9ca3af; text-align: center; padding: 16px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <header role="banner">
+        <h1>CUI Wah Campus</h1>
+    </header>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="facilities.html">Facilities & News</a>
+        <a href="admission.html"><strong>Admission & Contact</strong></a>
+    </nav>
+
+    <main role="main">
+
+        <!-- Admission Section -->
+        <section id="admission">
+            <h2>Admission Information</h2>
+
+            <h3>How to Apply</h3>
+            <ol>
+                <li>Visit the COMSATS admissions portal</li>
+                <li>Create an account with your personal details</li>
+                <li>Fill out the application form completely</li>
+                <li>Upload required documents (CNIC, transcripts, photos)</li>
+                <li>Pay the application fee via bank challan</li>
+                <li>Submit before the deadline</li>
+            </ol>
+
+            <h3>Important Dates - Fall 2026</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Admissions Open</td><td>August 1, 2026</td></tr>
+                    <tr><td>Application Deadline</td><td>October 15, 2026</td></tr>
+                    <tr><td>Merit List Announcement</td><td>October 25, 2026</td></tr>
+                    <tr><td>Fee Submission Deadline</td><td>November 5, 2026</td></tr>
+                    <tr><td>Classes Begin</td><td>November 10, 2026</td></tr>
+                </tbody>
+            </table>
+
+            <!-- FAQ using details/summary -->
+            <h3>Frequently Asked Questions</h3>
+
+            <details>
+                <summary>What is the admission criteria?</summary>
+                <p>For BS programs, candidates must have Intermediate (or equivalent) with minimum 50% marks. Admission is based on merit calculated from academic records and entry test.</p>
+            </details>
+
+            <details>
+                <summary>Is there a scholarship available?</summary>
+                <p>Yes, CUI offers merit-based and need-based scholarships. Top performers can get up to 100% tuition waiver.</p>
+            </details>
+
+            <details>
+                <summary>Can I transfer from another university?</summary>
+                <p>Transfer admissions are available for students with good academic standing. Credit transfer is subject to departmental approval.</p>
+            </details>
+
+            <details>
+                <summary>What documents are required?</summary>
+                <p>CNIC/B-Form, Matric certificates, Intermediate transcripts, Equivalence certificate (if applicable), Character certificate, and passport-size photographs.</p>
+            </details>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+
+            <form action="https://example.com/contact-submit" method="POST">
+
+                <fieldset>
+                    <legend>Send us a Message</legend>
+
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required minlength="3" placeholder="Enter your name">
+
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="you@example.com">
+
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">-- Select Subject --</option>
+                        <option value="admission">Admission Inquiry</option>
+                        <option value="programs">Program Information</option>
+                        <option value="fee">Fee Structure</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Write your message here..."></textarea>
+                    <small>Minimum 10 characters</small>
+
+                    <button type="submit">Send Message</button>
+                    <button type="reset" class="btn-reset">Clear</button>
+                </fieldset>
+
+            </form>
+        </section>
+
+        <!-- Contact Information -->
+        <section>
+            <h2>Contact Information</h2>
+            <address>
+                <p><strong>Address:</strong> COMSATS University Islamabad, Park Road, Chak Shahzad, Islamabad 45550, Pakistan</p>
+                <p><strong>Phone:</strong> <a href="tel:+92518157218">+92-51-8157218</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@comsats.edu.pk">info@comsats.edu.pk</a></p>
+                <p><strong>Office Hours:</strong> Monday - Friday: 8:00 AM - 5:00 PM</p>
+            </address>
+        </section>
+
+        <aside>
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="https://www.comsats.edu.pk" target="_blank" rel="noopener noreferrer">COMSATS Official Website</a></li>
+            </ul>
+        </aside>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 COMSATS University Islamabad, Wah Campus. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

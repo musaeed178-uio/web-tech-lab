@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 12: Integrated Project - Facilities & News Page -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus facilities and latest news at CUI Wah Campus">
+    <title>Facilities & News - CUI Wah Campus</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #111; }
+        header { background: #1a2332; color: white; padding: 16px 24px; }
+        header h1 { font-size: 20px; }
+        nav { background: #2d3f54; padding: 10px 24px; }
+        nav a { color: #ccc; text-decoration: none; margin-right: 16px; font-size: 14px; }
+        nav a:hover { color: white; text-decoration: underline; }
+        main { max-width: 960px; margin: 0 auto; padding: 30px 24px; }
+        section { margin-bottom: 30px; }
+        article { border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 16px; background: #f9fafb; }
+        article h3 { color: #1a2332; margin-bottom: 6px; }
+        aside { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px; margin: 16px 0; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 6px; }
+        figure { margin: 16px 0; }
+        figcaption { font-size: 13px; color: #6b7280; margin-top: 6px; }
+        footer { background: #1a2332; color: #9ca3af; text-align: center; padding: 16px; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <header role="banner">
+        <h1>CUI Wah Campus</h1>
+    </header>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="home.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="facilities.html"><strong>Facilities & News</strong></a>
+        <a href="admission.html">Admission & Contact</a>
+    </nav>
+
+    <main role="main">
+
+        <!-- Facilities Section -->
+        <section id="facilities">
+            <h2>Campus Facilities</h2>
+
+            <figure>
+                <img src="https://via.placeholder.com/700x300/1a2332/ffffff?text=CUI+Campus+View" 
+                     alt="Panoramic view of COMSATS Wah Campus showing academic buildings and green areas" 
+                     width="700" height="300">
+                <figcaption>CUI Wah Campus - A view of the academic block and surrounding green areas</figcaption>
+            </figure>
+
+            <ul>
+                <li><strong>Computer Laboratories</strong> - 5 fully equipped labs with latest hardware and software</li>
+                <li><strong>University Library</strong> - Over 50,000 books and digital resources</li>
+                <li><strong>High-Speed Internet</strong> - Campus-wide Wi-Fi connectivity</li>
+                <li><strong>Cafeteria</strong> - Affordable meals and snacks</li>
+                <li><strong>Sports Complex</strong> - Cricket ground, basketball court, gymnasium</li>
+                <li><strong>Smart Classrooms</strong> - Projectors and interactive boards</li>
+            </ul>
+        </section>
+
+        <!-- News Section -->
+        <section id="news">
+            <h2>Latest News & Announcements</h2>
+
+            <article>
+                <h3>Midterm Examinations Schedule</h3>
+                <p><small>Published: September 20, 2026</small></p>
+                <p>
+                    Midterm examinations for Fall 2026 will be held from October 15 to October 20, 2026.
+                    Students are advised to check their schedules on the student portal.
+                </p>
+            </article>
+
+            <article>
+                <h3>Web Development Workshop</h3>
+                <p><small>Published: September 18, 2026</small></p>
+                <p>
+                    A two-day workshop on HTML5, CSS3, and JavaScript will be conducted on October 5-6.
+                    Register at the CS Department office.
+                </p>
+            </article>
+
+            <article>
+                <h3>Career Fair 2026</h3>
+                <p><small>Published: September 15, 2026</small></p>
+                <p>
+                    Annual career fair will be held on October 25, 2026. Top tech companies
+                    including Systems Limited, Netsol, and Techaxis will participate.
+                </p>
+            </article>
+
+            <aside>
+                <h3>Related Links</h3>
+                <ul>
+                    <li><a href="#">Academic Calendar 2026</a></li>
+                    <li><a href="#">Student Portal</a></li>
+                    <li><a href="#">Examination Rules</a></li>
+                </ul>
+            </aside>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 COMSATS University Islamabad, Wah Campus. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

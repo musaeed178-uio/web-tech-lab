@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 12: Integrated Project - CUI Wah Campus Web Portal -->
+    <!-- Page: Home -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="COMSATS University Islamabad Wah Campus - Official Website">
+    <title>CUI Wah Campus - Home</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #111; }
+        header { background: #1a2332; color: white; padding: 16px 24px; }
+        header h1 { font-size: 20px; }
+        nav { background: #2d3f54; padding: 10px 24px; }
+        nav a { color: #ccc; text-decoration: none; margin-right: 16px; font-size: 14px; }
+        nav a:hover { color: white; text-decoration: underline; }
+        .hero { background: linear-gradient(135deg, #1a2332, #2d3f54); color: white; padding: 50px 24px; text-align: center; }
+        .hero h2 { font-size: 28px; margin-bottom: 10px; }
+        .hero p { font-size: 16px; color: #9ca3af; max-width: 500px; margin: 0 auto 20px; }
+        .hero a { display: inline-block; background: #3b82f6; color: white; padding: 10px 24px; border-radius: 6px; text-decoration: none; margin: 4px; }
+        .hero a:hover { background: #2563eb; }
+        main { max-width: 960px; margin: 0 auto; padding: 30px 24px; }
+        .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+        .card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; background: #f9fafb; }
+        .card h3 { color: #1a2332; margin-bottom: 8px; }
+        .card p { font-size: 14px; color: #6b7280; }
+        section { margin-bottom: 30px; }
+        footer { background: #1a2332; color: #9ca3af; text-align: center; padding: 16px; font-size: 13px; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #3b82f6; color: white; padding: 8px 16px; z-index: 100; text-decoration: none; }
+        .skip-link:focus { top: 0; }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <h1>CUI Wah Campus</h1>
+    </header>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="home.html"><strong>Home</strong></a>
+        <a href="programs.html">Programs</a>
+        <a href="facilities.html">Facilities & News</a>
+        <a href="admission.html">Admission & Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Welcome to CUI Wah Campus</h2>
+        <p>COMSATS University Islamabad - Providing quality education since 2002</p>
+        <a href="admission.html">Apply Now</a>
+        <a href="programs.html">View Programs</a>
+    </section>
+
+    <main id="main-content" role="main">
+
+        <section>
+            <h2>About CUI Wah Campus</h2>
+            <p>
+                COMSATS University Islamabad, Wah Campus is a leading institution offering
+                undergraduate and graduate programs in Computer Science, Software Engineering,
+                and Management Sciences. Our campus provides a modern learning environment with
+                experienced faculty and state-of-the-art facilities.
+            </p>
+        </section>
+
+        <section>
+            <h2>Quick Links</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>Academic Programs</h3>
+                    <p>Explore our BS and MS programs in CS, SE, IT, and Management.</p>
+                    <p><a href="programs.html">View Programs &rarr;</a></p>
+                </div>
+                <div class="card">
+                    <h3>Campus Facilities</h3>
+                    <p>Modern labs, library, sports complex, and cafeteria.</p>
+                    <p><a href="facilities.html">View Facilities &rarr;</a></p>
+                </div>
+                <div class="card">
+                    <h3>Admissions</h3>
+                    <p>Apply for Fall 2026 semester. Last date: October 15, 2026.</p>
+                    <p><a href="admission.html">Apply Now &rarr;</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            <address>
+                <p>COMSATS University Islamabad, Park Road, Chak Shahzad, Islamabad 45550</p>
+                <p>Phone: +92-51-8157218 | Email: <a href="mailto:info@comsats.edu.pk">info@comsats.edu.pk</a></p>
+            </address>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 COMSATS University Islamabad, Wah Campus. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

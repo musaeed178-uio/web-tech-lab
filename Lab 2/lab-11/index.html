@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 11: HTML5 Client-Side Form Validation -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form with Validation - CUI Wah</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 24px; line-height: 1.6; }
+        h1 { color: #1a2332; }
+        fieldset { border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        legend { font-weight: bold; padding: 0 8px; color: #1a2332; }
+        label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; margin-bottom: 6px; }
+        small { color: #666; display: block; margin-bottom: 14px; }
+        .required-note { color: #dc2626; font-size: 13px; margin-bottom: 16px; }
+        button { padding: 10px 20px; border: none; border-radius: 4px; font-size: 14px; cursor: pointer; margin-right: 8px; background: #2563eb; color: white; }
+        .btn-reset { background: #e5e7eb; color: #333; }
+        .test-results { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 8px; margin-top: 20px; }
+        .test-results h3 { margin-top: 0; color: #166534; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 13px; }
+        th { background: #f3f4f6; }
+        .pass { color: #16a34a; }
+        .fail { color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <h1>Workshop Registration Form</h1>
+    <p>With HTML5 client-side validation attributes.</p>
+    <p class="required-note">* Required fields are marked with an asterisk.</p>
+
+    <form action="https://example.com/register" method="POST" novalidate>
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <!-- REQUIRED: field cannot be empty -->
+            <label for="fullname">Full Name *</label>
+            <input type="text" id="fullname" name="fullname" required minlength="3" maxlength="50" placeholder="Enter your full name">
+            <small>Min 3 characters, Max 50 characters</small>
+
+            <!-- REQUIRED + EMAIL type validation -->
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="you@comsats.edu.pk">
+            <small>Must be a valid email format (e.g., user@domain.com)</small>
+
+            <!-- REQUIRED + PATTERN for phone format -->
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required pattern="03[0-9]{9}" placeholder="03XXXXXXXXX" maxlength="11">
+            <small>Must start with 03 followed by 9 digits (e.g., 03001234567)</small>
+
+            <!-- REQUIRED + PATTERN for roll number -->
+            <label for="roll">Roll Number *</label>
+            <input type="text" id="roll" name="roll" required pattern="[A-Z]{2}[0-9]{2}-[A-Z]{3}-[0-9]{3}" placeholder="SP23-BCS-041">
+            <small>Format: XX##-XXX-### (e.g., SP23-BCS-041)</small>
+        </fieldset>
+
+        <fieldset>
+            <legend>Program Details</legend>
+
+            <!-- REQUIRED select -->
+            <label for="program">Select Program *</label>
+            <select id="program" name="program" required>
+                <option value="">-- Choose your program --</option>
+                <option value="cs">BS Computer Science</option>
+                <option value="se">BS Software Engineering</option>
+                <option value="it">BS Information Technology</option>
+            </select>
+
+            <!-- NUMBER with min/max -->
+            <label for="semester">Current Semester *</label>
+            <input type="number" id="semester" name="semester" required min="1" max="8" value="1">
+            <small>Must be between 1 and 8</small>
+
+            <!-- DATE with min/max -->
+            <label for="regdate">Registration Date *</label>
+            <input type="date" id="regdate" name="regdate" required min="2026-09-01" max="2026-12-31">
+            <small>Must be between Sept 1, 2026 and Dec 31, 2026</small>
+        </fieldset>
+
+        <fieldset>
+            <legend>Additional Details</label>
+
+            <!-- TEXTAREA with minlength/maxlength -->
+            <label for="experience">Tell us about your experience *</label>
+            <textarea id="experience" name="experience" required minlength="20" maxlength="200" rows="4" placeholder="Describe your programming experience..."></textarea>
+            <small>Min 20 characters, Max 200 characters</small>
+
+            <!-- NUMBER with step -->
+            <label for="hours">Weekly study hours</label>
+            <input type="number" id="hours" name="hours" min="1" max="40" step="1" value="10">
+            <small>Between 1 and 40 hours per week</small>
+        </fieldset>
+
+        <button type="submit">Register</button>
+        <button type="reset" class="btn-reset">Clear Form</button>
+
+    </form>
+
+    <!-- Test Results Documentation -->
+    <div class="test-results">
+        <h3>Validation Test Results</h3>
+        <p>Below are the results of testing different inputs:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Test Case</th>
+                    <th>Input</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Full Name</td>
+                    <td>Empty field</td>
+                    <td>(empty)</td>
+                    <td class="pass">PASS - Browser shows "Please fill out this field"</td>
+                </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td>Too short</td>
+                    <td>Ab</td>
+                    <td class="pass">PASS - Browser shows "Please lengthen this text to 3 characters"</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>Invalid format</td>
+                    <td>notanemail</td>
+                    <td class="pass">PASS - Browser shows "Please include an '@' in the email"</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>Wrong pattern</td>
+                    <td>12345</td>
+                    <td class="pass">PASS - Browser shows "Please match the requested format"</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>Valid input</td>
+                    <td>03001234567</td>
+                    <td class="pass">PASS - Accepted</td>
+                </tr>
+                <tr>
+                    <td>Roll No</td>
+                    <td>Wrong format</td>
+                    <td>abc</td>
+                    <td class="pass">PASS - Browser shows pattern mismatch</td>
+                </tr>
+                <tr>
+                    <td>Semester</td>
+                    <td>Out of range</td>
+                    <td>10</td>
+                    <td class="pass">PASS - Browser shows "Value must be less than or equal to 8"</td>
+                </tr>
+                <tr>
+                    <td>Experience</td>
+                    <td>Too short</td>
+                    <td>Hello</td>
+                    <td class="pass">PASS - Browser shows "Please lengthen this text to 20 characters"</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+    <h3>Important Note</h3>
+    <p><strong>Client-side validation is NOT a security control!</strong></p>
+    <p>It can be easily bypassed by disabling JavaScript or using developer tools. Always validate data on the server side as well.</p>
+
+    <p><small>&copy; 2026 CUI Wah Campus</small></p>
+
+</body>
+</html>

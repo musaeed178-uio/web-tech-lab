@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Lab 08: Semantic HTML5 Page Structure -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUI Wah Campus - Semantic Structure</title>
+    <style>
+        /* Simple CSS to visualize semantic elements */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        header { background: #1a2332; color: white; padding: 16px 24px; }
+        nav { background: #2d3f54; padding: 12px 24px; }
+        nav a { color: #ccc; text-decoration: none; margin-right: 16px; }
+        nav a:hover { color: white; }
+        main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        section { margin-bottom: 30px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f9fafb; }
+        article { background: white; padding: 16px; border: 1px solid #e5e7eb; border-radius: 6px; margin-bottom: 16px; }
+        aside { background: #eff6ff; padding: 16px; border-left: 4px solid #3b82f6; margin: 16px 0; }
+        footer { background: #1a2332; color: #9ca3af; text-align: center; padding: 16px; font-size: 13px; }
+        h1 { margin: 0; font-size: 20px; }
+        h2 { color: #1a2332; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER: Site identity and branding -->
+    <header>
+        <h1>CUI Wah Campus</h1>
+        <p>COMSATS University Islamabad - Wah Campus</p>
+    </header>
+
+    <!-- NAV: Navigation links -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#programs">Programs</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- MAIN: Primary content of the page -->
+    <main>
+
+        <!-- SECTION: Major topic - About -->
+        <section id="about">
+            <h2>About CUI Wah Campus</h2>
+            <p>
+                COMSATS University Islamabad, Wah Campus is one of the leading campuses
+                providing quality education in various disciplines. The campus offers
+                undergraduate and graduate programs in Computer Science, Software Engineering,
+                Management Sciences, and more.
+            </p>
+        </section>
+
+        <!-- SECTION: News with ARTICLE elements -->
+        <section id="news">
+            <h2>Latest News</h2>
+
+            <!-- ARTICLE: Independent content block -->
+            <article>
+                <h3>Midterm Examinations Schedule Announced</h3>
+                <p><small>Published: September 20, 2026</small></p>
+                <p>
+                    The midterm examinations for Fall 2026 semester will be conducted from
+                    October 15 to October 20, 2026. Students are advised to check their
+                    individual schedules on the student portal.
+                </p>
+            </article>
+
+            <!-- ARTICLE: Another independent content block -->
+            <article>
+                <h3>Web Development Workshop</h3>
+                <p><small>Published: September 18, 2026</small></p>
+                <p>
+                    A two-day workshop on modern web development technologies will be held
+                    on October 5-6, 2026. The workshop will cover HTML5, CSS3, and JavaScript
+                    fundamentals. Registration is open for all students.
+                </p>
+            </article>
+
+            <!-- ASIDE: Related information -->
+            <aside>
+                <h3>Related Links</h3>
+                <ul>
+                    <li><a href="#">Academic Calendar 2026</a></li>
+                    <li><a href="#">Examination Rules</a></li>
+                    <li><a href="#">Student Portal Login</a></li>
+                </ul>
+            </aside>
+        </section>
+
+        <!-- SECTION: Programs -->
+        <section id="programs">
+            <h2>Our Programs</h2>
+
+            <article>
+                <h3>BS Computer Science</h3>
+                <p>
+                    A 4-year undergraduate program covering computing fundamentals,
+                    programming, algorithms, databases, and software engineering.
+                </p>
+            </article>
+
+            <article>
+                <h3>BS Software Engineering</h3>
+                <p>
+                    A 4-year program focused on software development lifecycle,
+                    testing, project management, and quality assurance.
+                </p>
+            </article>
+        </section>
+
+        <!-- ASIDE: Sidebar information -->
+        <aside>
+            <h3>Campus Hours</h3>
+            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+            <p>Saturday: 9:00 AM - 1:00 PM</p>
+            <p>Sunday: Closed</p>
+        </aside>
+
+    </main>
+
+    <!-- FOOTER: Closing information -->
+    <footer>
+        <p>&copy; 2026 COMSATS University Islamabad, Wah Campus. All rights reserved.</p>
+        <p>Address: Park Road, Chak Shahzad, Islamabad 45550</p>
+    </footer>
+
+</body>
+</html>
