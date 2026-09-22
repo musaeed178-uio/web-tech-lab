@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - COMSATS Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="logo"><img src="img/images.jfif" alt="COMSATS" class="logo-img" width="32" height="32"> Lost<span>&</span>Found</div>
+        <div class="header-right">
+            <button class="btn-nav" onclick="adminLogoutBtn()">Sign Out</button>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+        </div>
+    </div>
+    <nav>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="report.html">Report Item</a></li>
+            <li><a href="items.html">Browse Items</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="section-header">
+        <h2>Admin Dashboard</h2>
+        <p>Manage all reported items and claims.</p>
+    </div>
+
+    <!-- Stats -->
+    <div id="stats-grid" class="stats-grid"></div>
+
+    <!-- Claims -->
+    <div class="card" style="margin-bottom:24px;">
+        <div class="section-header">
+            <h2>Claims</h2>
+            <p>Review and approve or reject item claims.</p>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th>Claimer Name</th>
+                        <th>Roll No</th>
+                        <th>Proof</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-claims-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Items -->
+    <div class="card">
+        <div class="section-header">
+            <h2>All Items</h2>
+            <p>View, resolve, or delete reported items.</p>
+        </div>
+        <div class="table-wrap">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Reported By</th>
+                        <th>Roll No</th>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-items-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 COMSATS Lost & Found Portal. All rights reserved.</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script>renderAdminDashboard();</script>
+</body>
+</html>

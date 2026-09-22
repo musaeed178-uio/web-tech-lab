@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Item - COMSATS Lost & Found</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="logo"><img src="img/images.jfif" alt="COMSATS" class="logo-img" width="32" height="32"> Lost<span>&</span>Found</div>
+        <div class="header-right">
+            <button class="btn-nav" onclick="document.getElementById('admin-login-modal').classList.add('active')">Admin Login</button>
+            <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+        </div>
+    </div>
+    <nav>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="report.html" class="active">Report Item</a></li>
+            <li><a href="items.html">Browse Items</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="section-header">
+        <h2>Report an Item</h2>
+        <p>Fill in the details below. All fields marked with * are required.</p>
+    </div>
+
+    <div class="form-success" id="report-success">
+        Item reported successfully! <a href="items.html">View all items</a>
+    </div>
+
+    <div class="card" style="max-width:700px;">
+        <form onsubmit="return handleReport(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your Name *</label>
+                    <input type="text" id="report-name" placeholder="e.g., Ahmed Raza">
+                    <div class="form-error">Please enter your name.</div>
+                </div>
+                <div class="form-group">
+                    <label>Roll Number *</label>
+                    <input type="text" id="report-roll" placeholder="e.g., SP23-BCS-041">
+                    <div class="form-error">Please enter your roll number.</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Item Type *</label>
+                    <select id="report-type">
+                        <option value="">Select type</option>
+                        <option value="lost">Lost</option>
+                        <option value="found">Found</option>
+                    </select>
+                    <div class="form-error">Please select an item type.</div>
+                </div>
+                <div class="form-group">
+                    <label>Location *</label>
+                    <input type="text" id="report-location" placeholder="e.g., Library, C-Block">
+                    <div class="form-error">Please enter the location.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Item Title *</label>
+                <input type="text" id="report-title" placeholder="e.g., Blue Backpack, Student ID Card">
+                <div class="form-error">Please enter an item title.</div>
+            </div>
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="report-desc" rows="4" placeholder="Describe the item: color, brand, distinguishing features, when/where it was lost or found..."></textarea>
+                <div class="form-error">Please provide a description.</div>
+            </div>
+            <div class="form-group">
+                <label>Contact Email *</label>
+                <input type="email" id="report-contact" placeholder="your@comsats.edu.pk">
+                <div class="form-error">Please enter a valid email address.</div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:auto;">Submit Report</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 COMSATS Lost & Found Portal. All rights reserved.</p>
+</footer>
+
+<div id="admin-login-modal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h3>Admin Login</h3>
+            <button class="modal-close" onclick="closeModal('admin-login-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form onsubmit="return handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="admin-user" placeholder="Enter admin username">
+                    <div class="form-error">Username is required.</div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="admin-pass" placeholder="Enter admin password">
+                    <div class="form-error">Password is required.</div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
