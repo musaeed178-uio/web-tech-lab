@@ -1,6 +1,134 @@
-<html>
-<title> Hello world</title>
-  <body>
-  <h1> Hello world</h1>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Umar Saeed — Web Technologies Lab Hub (FA24-BCS-225)</title>
+  <meta name="description" content="Hub for the Web Technologies lab by Muhammad Umar Saeed (FA24-BCS-225): Lost &amp; Found portal, twelve HTML/CSS activities, and the Food Corner website.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>%F0%9F%8E%93</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a class="brand" href="#main">
+        <span class="brand-chip">HUB</span>
+        <span class="brand-name">Muhammad Umar Saeed</span>
+        <span class="brand-reg">FA24-BCS-225</span>
+      </a>
+      <nav aria-label="Utility">
+        <a href="https://github.com/musaeed178-uio/web-tech-lab">Repo</a>
+        <a href="https://github.com/musaeed178-uio/web-tech-lab/blob/main/README.md">README</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="kicker">Web Technologies Lab &middot; CUI Wah &middot; 2026</p>
+      <h1 id="hero-title">The Lab Hub</h1>
+      <p class="ring">&ldquo;The one ring to rule them all.&rdquo;</p>
+      <p class="lede">
+        Three assignments, three deployments, one repository &mdash; and this is the
+        page that binds them. Everything below is plain HTML, CSS and JavaScript:
+        no frameworks, no build steps, no hidden magic. Clone it, break it,
+        make it better than me.
+      </p>
+      <p class="identity">
+        <span class="id-name">Muhammad Umar Saeed</span>
+        <span class="id-reg">FA24-BCS-225</span>
+        <span class="id-course">COMSATS University Islamabad (Wah Campus)</span>
+      </p>
+    </section>
+
+    <section class="grid" aria-label="Labs">
+
+      <article class="card">
+        <p class="card-chip" aria-hidden="true">01</p>
+        <h2>Lost &amp; Found Portal</h2>
+        <p>
+          Report it, browse it, claim it &mdash; a campus lost &amp; found with
+          search, filters and an admin login that lives entirely in your browser.
+          Multi-page, vanilla JS, zero frameworks harmed.
+        </p>
+        <code class="card-path">Lab 1/index.html</code>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="Lab%201/index.html">Open lab</a>
+          <a class="btn btn-ghost" href="https://webtech-lab1-eosin.vercel.app" target="_blank" rel="noopener">Live <span aria-hidden="true">&#8599;</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="card-chip" aria-hidden="true">02</p>
+        <h2>Twelve Activities</h2>
+        <p>
+          Twelve folders of HTML &amp; CSS &mdash; semantic structure, media,
+          tables, forms, validation, accessibility and a four-page website &mdash;
+          all indexed by a landing page so you never get lost in folder names.
+        </p>
+        <code class="card-path">Lab 2/index.html</code>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="Lab%202/index.html">Open lab</a>
+          <a class="btn btn-ghost" href="https://webtech-lab2.vercel.app" target="_blank" rel="noopener">Live <span aria-hidden="true">&#8599;</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="card-chip" aria-hidden="true">03</p>
+        <h2>Food Corner</h2>
+        <p>
+          A restaurant one-pager with strong opinions about napkins, plated on top
+          of the CSS checklist: margin collapsing, min/max sizing, overflow,
+          display and cascade &mdash; the assignment, served hot.
+        </p>
+        <code class="card-path">Lab 3/FoodCorner v2/index.html</code>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="Lab%203/FoodCorner%20v2/index.html">Open lab</a>
+          <a class="btn btn-ghost" href="https://webtech-lab3.vercel.app" target="_blank" rel="noopener">Live <span aria-hidden="true">&#8599;</span></a>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="strip" aria-label="How it is hosted">
+      <div class="strip-col">
+        <h3>One repo to feed them all</h3>
+        <p>
+          This hub rides <strong>GitHub Pages</strong>; each lab ships its own
+          <strong>Vercel</strong> deployment. A single push to GitHub updates all
+          four &mdash; the ring is generous like that.
+        </p>
+      </div>
+      <div class="strip-col">
+        <h3>Run it yourself in ten seconds</h3>
+        <p class="cmd">
+          git clone https://github.com/musaeed178-uio/web-tech-lab.git
+        </p>
+        <p>
+          Open <code>index.html</code> &mdash; that&rsquo;s it. No install, no build,
+          no &ldquo;works on my machine&rdquo;. Fork it and experiment freely
+          (license says so, legally even).
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap foot-in">
+      <p>
+        &copy; 2026 Muhammad Umar Saeed &middot; FA24-BCS-225 &middot;
+        Web Technologies Lab &middot; CUI Wah
+      </p>
+      <p class="foot-note">
+        <a href="https://github.com/musaeed178-uio/web-tech-lab/issues">Report a bug</a>
+        <span aria-hidden="true">/</span>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Colophon</a>
+        <span aria-hidden="true">/</span>
+        <span>Made with HTML, CSS &amp; spite</span>
+      </p>
+    </div>
+  </footer>
+</body>
 </html>
