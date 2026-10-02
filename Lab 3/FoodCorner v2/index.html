@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Food Corner - fresh, fun, tasty food. Pizza, burger, sandwich and pasta.">
+    <title>Food Corner</title>
+
+    <!-- ===== EXTERNAL CSS (type 3 of 3): the main stylesheet ===== -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ============================================================
+         INTERNAL CSS (type 2 of 3)
+         Used only for the ticker strip at the very top, because it is
+         a small announcement bar that belongs only to this page.
+         ============================================================ -->
+    <style>
+        .ticker {
+            background-color: #14261f;
+            color: #ffc53d;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 9px 12px;
+        }
+        .ticker b {
+            color: #ff5e3a;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top ticker (styled with the INTERNAL CSS above) -->
+    <div class="ticker">Grand opening week &mdash; <b>buy 1 get 1 free</b> on all pizzas</div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-head">
+        <div class="head-row">
+            <h1 class="brand">FOOD<span class="brand-dot">.</span>CORNER</h1>
+
+            <!-- INLINE CSS (type 1 of 3)
+                 One-off sticker style used on this single element only. -->
+            <span class="hours" style="background-color:#ffc53d;color:#14261f;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:bold;transform:rotate(-3deg);">OPEN TILL 11 PM</span>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= WELCOME SECTION ================= -->
+    <section id="home" class="hero">
+        <div class="container">
+            <p class="hero-kicker">FRESH &bull; FAST &bull; NO NAPKINS NEEDED</p>
+            <h2 class="section-title hero-title">Taste the <span class="hl">good stuff</span></h2>
+            <p class="hero-text">
+                Hungry? Good. Food Corner serves hot, fresh and honest food every day.
+                Pick a dish, smash that button, and we start cooking.
+            </p>
+            <a href="#menu" class="btn btn-hero">Explore Menu &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ================= MENU SECTION ================= -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Today&rsquo;s Menu</h2>
+            <p class="section-sub">four favourites, zero regrets</p>
+
+            <div class="cards">
+
+                <!-- First card gets a special style via :first-child -->
+                <div class="card">
+                    <div class="card-media">
+                        <img src="images/pizza.png" alt="Pizza" width="600" height="400">
+                        <span class="card-tag">Rs. 650</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Pizza</h3>
+                        <p class="card-desc">Wood-fired base, mozzarella pull and pepperoni on top.</p>
+                        <button type="button" class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-media">
+                        <img src="images/burger.png" alt="Burger" width="600" height="400">
+                        <span class="card-tag">Rs. 450</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Burger</h3>
+                        <p class="card-desc">Double patty, melted cheese and crispy lettuce in a soft bun.</p>
+                        <button type="button" class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-media">
+                        <img src="images/sandwich.png" alt="Sandwich" width="600" height="400">
+                        <span class="card-tag">Rs. 350</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Sandwich</h3>
+                        <p class="card-desc">Toasted triangles stacked with veggies, cheese and sauce.</p>
+                        <button type="button" class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-media">
+                        <img src="images/pasta.png" alt="Pasta" width="600" height="400">
+                        <span class="card-tag">Rs. 550</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Pasta</h3>
+                        <p class="card-desc">Swirls of spaghetti in a creamy tomato-basil sauce.</p>
+                        <button type="button" class="order-btn">Order Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT SECTION ================= -->
+    <section id="about" class="about-section">
+        <div class="container about-grid">
+            <div class="about-copy">
+                <h2 class="section-title">Our Story</h2>
+                <p class="about-text">
+                    Food Corner started in 2026 with one stubborn idea: tasty food should not
+                    cost a fortune. Everything is cooked fresh after you order &mdash; nothing
+                    sits under a lamp waiting for you. Small menu, big flavour, fair prices.
+                </p>
+            </div>
+            <aside class="about-facts">
+                <h3 class="facts-title">Quick facts</h3>
+                <ul class="facts-list">
+                    <li><strong>4</strong> dishes on the menu</li>
+                    <li><strong>100%</strong> cooked after you order</li>
+                    <li><strong>0</strong> frozen ingredients</li>
+                    <li><strong>11 PM</strong> kitchen closes</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT SECTION ================= -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Say Hello</h2>
+            <p class="section-sub">drop a message, we reply fast</p>
+
+            <form action="#" method="post" class="contact-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="What are you craving today?" required></textarea>
+
+                <button type="submit" class="btn btn-send">Send it</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         CSS DEMONSTRATIONS SECTION
+         Boxes for: margin collapsing, width/height constraints,
+         overflow, display properties, cascade and specificity.
+         ============================================================ -->
+    <section id="demos" class="demos-section">
+        <div class="container">
+            <h2 class="section-title">CSS Lab Demos</h2>
+
+            <!-- Demo 1: MARGIN COLLAPSING -->
+            <div class="demo-box">
+                <span class="demo-num">1</span>
+                <h3>Margin Collapsing</h3>
+                <p class="demo-note">
+                    Box A ends with <code>margin-bottom: 40px</code>, Box B starts with
+                    <code>margin-top: 20px</code>. The margins collapse into a single
+                    <strong>40px</strong> gap &mdash; they do not add up to 60px.
+                </p>
+                <div class="collapse-box collapse-a">Box A &mdash; margin-bottom: 40px</div>
+                <div class="collapse-box collapse-b">Box B &mdash; margin-top: 20px</div>
+                <p class="demo-note">Gap you can measure on screen = <strong>40px</strong>, not 60px.</p>
+            </div>
+
+            <!-- Demo 2: WIDTH / HEIGHT CONSTRAINTS -->
+            <div class="demo-box">
+                <span class="demo-num">2</span>
+                <h3>Width / Height Constraints</h3>
+                <p class="demo-note">
+                    Resize the window: this box uses <code>width: 60%</code> but never shrinks
+                    below <code>min-width: 300px</code> or grows past <code>max-width: 700px</code>.
+                    Same idea for its height.
+                </p>
+                <div class="constrained-box">
+                    I stop growing at 700px and stop shrinking at 300px.<br>
+                    height: 120px (min 80px / max 200px)
+                </div>
+            </div>
+
+            <!-- Demo 3: OVERFLOW -->
+            <div class="demo-box">
+                <span class="demo-num">3</span>
+                <h3>Overflow</h3>
+                <p class="demo-note">Identical text, identical box, three overflow values:</p>
+                <div class="overflow-row">
+                    <div class="overflow-box overflow-visible">
+                        <strong>overflow: visible</strong>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. They live in Semantongrove right at the coast.</p>
+                    </div>
+                    <div class="overflow-box overflow-hidden">
+                        <strong>overflow: hidden</strong>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. They live in Semantongrove right at the coast.</p>
+                    </div>
+                    <div class="overflow-box overflow-scroll">
+                        <strong>overflow: scroll</strong>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. They live in Semantongrove right at the coast.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo 4: DISPLAY PROPERTIES -->
+            <div class="demo-box">
+                <span class="demo-num">4</span>
+                <h3>Display Properties</h3>
+                <p class="demo-note">
+                    <span class="demo-block">display: block &mdash; takes the whole line</span>
+                    <span class="demo-inline">display: inline</span>
+                    <span class="demo-inline-block">display: inline-block</span>
+                    flows in text but keeps padding &nbsp;
+                    <span class="demo-none">display: none &mdash; you cannot see me</span>
+                    (that last one is hidden with <code>display: none</code>).
+                </p>
+            </div>
+
+            <!-- Demo 5: CASCADE + SPECIFICITY -->
+            <div class="demo-box">
+                <span class="demo-num">5</span>
+                <h3>Cascade &amp; Specificity</h3>
+                <p class="demo-note">
+                    Two rules with <strong>same specificity</strong> fight in style.css:
+                    the one written <strong>later</strong> wins (source order / cascade).
+                </p>
+                <div class="specificity-demo">I am GREEN because the green rule comes last in style.css</div>
+                <p class="demo-note">
+                    In the menu, <code>.card { ... }</code> loses to
+                    <code>.menu-section .card { ... }</code> because the second selector
+                    is more specific (0-2-0 beats 0-1-0).
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Hidden with display: none in style.css -->
+    <p class="hidden-note">Closed on Sundays. (You cannot see me because of display: none)</p>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-foot">
+        <p class="foot-brand">FOOD<span class="brand-dot">.</span>CORNER</p>
+        <p>&copy; 2026 Food Corner</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,751 @@
+/* ============================================================
+   FOOD CORNER - style.css  (complete redesign, v2 "sticker" look)
+   Lab 3: Integrated CSS Website Development
+   Student: Shujaat Ahmed (FA24-BCS-155)
+
+   DESIGN: playful sticker-style bistro
+   - deep green + coral + sun yellow on warm cream
+   - fat uppercase display headings, pill buttons
+   - cards with hard offset shadows and rotated price stickers
+
+   CSS TYPES: this file = EXTERNAL (main).
+   The <style> block in index.html = INTERNAL (ticker only).
+   The style attribute in index.html = INLINE (open-hours sticker).
+   ============================================================ */
+
+
+/* ============================================================
+   1. DESIGN TOKENS + BASE + INHERITANCE
+   body's font and color are INHERITED by every child element
+   unless a child overrides them.
+   ============================================================ */
+:root {
+    --ink: #14261f;
+    --green: #0b3e35;
+    --green-2: #0f5145;
+    --coral: #ff5e3a;
+    --sun: #ffc53d;
+    --cream: #fff7ec;
+    --blush: #ffe9e0;
+    --mint: #e4f1ea;
+    --paper: #ffffff;
+}
+
+body {
+    font-family: "Segoe UI", "Trebuchet MS", Verdana, sans-serif;  /* inherited */
+    color: var(--ink);                                              /* inherited */
+    background-color: var(--cream);
+    margin: 0;
+    line-height: 1.65;
+}
+
+/* Override inherited styling for selected elements:
+   the footer does NOT keep body's dark ink color */
+.site-foot {
+    color: #cfe0d8;
+}
+
+.hero {
+    color: var(--paper);      /* hero overrides inherited color too */
+}
+
+
+/* ============================================================
+   2. SELECTORS (all six required types)
+   ============================================================ */
+
+/* a) ELEMENT selector - applies to every h2 on the page */
+h2 {
+    line-height: 1.15;
+}
+
+/* b) CLASS selector - every element with class="card" */
+.card {
+    background-color: var(--paper);
+    width: 250px;
+}
+
+/* c) ID selector - the single element with id="home" */
+#home {
+    text-align: center;
+}
+
+/* d) ATTRIBUTE selector - every link whose href starts with # */
+a[href^="#"] {
+    text-decoration: none;
+}
+
+/* e) GROUPING selector - one rule for three selectors at once */
+h1, h2, h3 {
+    font-family: "Arial Black", "Segoe UI Black", "Segoe UI", sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* f) DESCENDANT selector - anchors inside list items inside nav */
+nav ul li a {
+    color: var(--cream);
+    padding: 9px 17px;
+    display: inline-block;          /* DISPLAY: inline-block (nav links) */
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* descendant: images inside cards inside the menu section */
+.menu-section .card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* ============================================================
+   3. PSEUDO-CLASSES
+   ============================================================ */
+
+/* :hover - navigation links change when hovered */
+nav ul li a:hover {
+    background-color: var(--sun);
+    color: var(--ink);
+    text-decoration: underline;
+}
+
+/* :hover - Order Now buttons change when hovered */
+.order-btn:hover {
+    background-color: var(--green);
+    color: var(--sun);
+    transform: translateY(-3px);
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: pointer;
+}
+
+/* :hover - main buttons */
+.btn-hero:hover,
+.btn-send:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+}
+
+/* :first-child - the FIRST food card is styled differently */
+.cards .card:first-child {
+    border: 3px solid var(--coral);
+    box-shadow: 7px 7px 0 var(--coral);
+    transform: rotate(-1.5deg);
+}
+.cards .card:first-child .card-tag {
+    background-color: var(--coral);
+    color: var(--paper);
+}
+
+
+/* ============================================================
+   4. PSEUDO-ELEMENTS (::before and ::after)
+   ============================================================ */
+.section-title::before {
+    content: "\1F374  ";               /* fork & knife BEFORE the heading */
+}
+
+.section-title::after {
+    content: "";                       /* a coral swash UNDER the heading */
+    display: block;
+    width: 74px;
+    height: 7px;
+    background-color: var(--coral);
+    border-radius: 999px;
+    margin: 16px auto 0 auto;
+}
+.hero-title::after {
+    background-color: var(--sun);
+}
+
+
+/* ============================================================
+   5. CASCADE + SPECIFICITY (conflicting rules)
+   ------------------------------------------------------------
+   Conflict 1 - SAME specificity for both rules, so the cascade
+   (source order) decides: the rule written later wins -> GREEN.
+   ============================================================ */
+.specificity-demo {
+    background-color: red;             /* rule 1: written first, loses */
+    color: white;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.specificity-demo {
+    background-color: green;           /* rule 2: written later, wins */
+}
+
+/* Conflict 2 - DIFFERENT specificity:
+   .card                -> 0-1-0
+   .menu-section .card  -> 0-2-0 (higher, so it wins) */
+.card {
+    color: #8a8f8c;
+}
+.menu-section .card {
+    color: var(--ink);
+}
+
+
+/* ============================================================
+   6. LAYOUT + SPACING RHYTHM
+   ============================================================ */
+.container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 62px 0;
+}
+
+.section-title {
+    font-size: 36px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 34px 0;
+    color: var(--ink);
+}
+
+.section-sub {
+    text-align: center;
+    font-style: italic;                    /* font-style */
+    font-size: 17px;
+    color: var(--green-2);
+    margin: -22px 0 34px 0;
+    text-decoration: underline dotted;     /* text-decoration */
+    text-underline-offset: 6px;
+}
+
+
+/* ============================================================
+   7. HEADER + NAVIGATION
+   ============================================================ */
+.site-head {
+    background-color: var(--green);
+    border-bottom: 5px solid var(--coral);
+    padding: 18px 25px;
+}
+.head-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    max-width: 1160px;
+    margin: 0 auto;
+}
+.brand {
+    color: var(--sun);
+    font-size: 26px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+.brand-dot {
+    color: var(--coral);
+}
+.main-nav {
+    margin-left: auto;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav ul li {
+    display: inline-block;                /* DISPLAY: inline-block */
+    margin: 3px 2px;
+}
+
+
+/* ============================================================
+   8. WELCOME / HERO (background showcase section)
+   background-color + background-image + background-repeat
+   + background-position + background-size - all five used.
+   ============================================================ */
+.hero {
+    background-color: var(--green);                          /* background-color */
+    background-image: url("images/bg-pattern.png");          /* background-image */
+    background-repeat: repeat;                               /* background-repeat */
+    background-position: center center;                      /* background-position */
+    background-size: 120px 120px;                            /* background-size */
+    padding: 90px 20px;
+}
+.hero-kicker {
+    color: var(--coral);
+    font-weight: bold;
+    letter-spacing: 4px;
+    font-size: 14px;
+    margin: 0 0 14px 0;
+}
+.hero-title {
+    color: var(--paper);
+    font-size: 58px;
+    text-transform: uppercase;
+    margin: 0;
+}
+.hero-title .hl {
+    color: var(--coral);
+    display: inline-block;
+    transform: rotate(-2deg);
+}
+.hero-text {
+    color: rgb(214, 233, 226);             /* RGB color */
+    font-size: 19px;
+    font-style: italic;
+    max-width: 620px;
+    margin: 26px auto 34px auto;
+    line-height: 1.8;
+    text-align: center;
+}
+
+
+/* ============================================================
+   9. BUTTONS
+   ============================================================ */
+.btn {
+    display: inline-block;                 /* DISPLAY: inline-block */
+    border: 3px solid var(--ink);
+    padding: 15px 34px;
+    font-family: "Arial Black", "Segoe UI", sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-hero {
+    background-color: var(--coral);
+    color: var(--paper);
+    text-decoration: none;
+    box-shadow: 5px 5px 0 var(--ink);
+}
+.btn-send {
+    background-color: var(--sun);
+    color: var(--ink);
+    margin-top: 22px;
+    box-shadow: 5px 5px 0 var(--ink);
+}
+
+
+/* ============================================================
+   10. MENU SECTION + BOX MODEL ON THE CARDS
+   Content -> Padding -> Border -> Margin (all four visible)
+   ============================================================ */
+.menu-section {
+    background-color: var(--cream);
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 34px;
+}
+
+.card {
+    /* PADDING: space between content and border */
+    padding: 0 0 20px 0;
+
+    /* BORDER + rounded corners */
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+
+    /* MARGIN: space outside the card */
+    margin: 6px;
+
+    /* WIDTH + fixed HEIGHT of the content box */
+    width: 250px;
+    min-height: 375px;
+
+    /* padding & border are counted INSIDE the width,
+       so every card stays exactly 250px wide */
+    box-sizing: border-box;
+
+    /* hard "sticker" shadow + smooth hover lift */
+    box-shadow: 5px 5px 0 rgba(20, 38, 31, 0.9);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 8px 10px 0 var(--sun);
+}
+
+.card-media {
+    position: relative;
+}
+.card-tag {
+    position: absolute;
+    top: -12px;
+    right: -8px;
+    background-color: var(--sun);          /* HEX color */
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 6px 13px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 14px;
+    transform: rotate(-8deg);
+    z-index: 2;
+}
+.card-body {
+    padding: 4px 18px 0 18px;
+}
+.card-title {
+    margin: 16px 0 6px 0;
+    font-size: 23px;
+    text-transform: uppercase;
+}
+.card-desc {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    min-height: 68px;                   /* consistent card sizes */
+}
+.order-btn {
+    display: inline-block;              /* DISPLAY: inline-block */
+    margin-top: 16px;
+    background-color: var(--coral);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
+}
+
+
+/* ============================================================
+   11. ABOUT SECTION
+   ============================================================ */
+.about-section {
+    background-color: var(--blush);
+}
+.about-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+}
+.about-copy {
+    flex: 2;
+    min-width: 280px;
+}
+.about-copy .section-title {
+    text-align: left;
+}
+.about-copy .section-title::after {
+    margin: 16px 0 0 0;
+}
+.about-text {
+    font-size: 18px;
+    line-height: 1.9;
+    color: rgb(64, 51, 45);              /* RGB color */
+    text-align: justify;
+}
+.about-facts {
+    flex: 1;
+    min-width: 240px;
+    background-color: var(--green);
+    color: var(--cream);
+    border: 3px solid var(--ink);
+    border-radius: 22px;
+    padding: 26px 28px;
+    box-shadow: 7px 7px 0 var(--sun);
+    transform: rotate(1.5deg);
+}
+.facts-title {
+    margin: 0 0 14px 0;
+    color: var(--sun);
+    text-transform: uppercase;
+    font-size: 18px;
+}
+.facts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.facts-list li {
+    padding: 9px 0;
+    border-bottom: 1px dashed rgba(255, 247, 236, 0.35);
+    font-size: 15px;
+}
+.facts-list li:last-child {
+    border-bottom: none;
+}
+.facts-list strong {
+    color: var(--coral);
+    font-size: 18px;
+}
+
+
+/* ============================================================
+   12. CONTACT SECTION + FORM
+   ============================================================ */
+.contact-section {
+    background-color: var(--mint);
+}
+.contact-form {
+    max-width: 560px;
+    margin: 0 auto;
+    background-color: var(--paper);
+    border: 3px solid var(--ink);
+    border-radius: 24px;
+    padding: 34px 38px;
+    box-shadow: 8px 8px 0 var(--green);
+}
+.contact-form label {
+    display: block;                     /* DISPLAY: block */
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin: 18px 0 7px 0;
+    color: var(--green-2);
+}
+.contact-form input,
+.contact-form textarea {
+    display: block;                     /* DISPLAY: block */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 2px solid #cdd8d2;
+    border-radius: 14px;
+    background-color: #f6faf8;
+    color: var(--ink);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--coral);
+    background-color: var(--paper);
+    box-shadow: 0 0 0 4px rgba(255, 94, 58, 0.18);
+}
+.contact-form textarea {
+    resize: vertical;
+}
+
+
+/* ============================================================
+   13. CSS DEMONSTRATIONS SECTION
+   ============================================================ */
+.demos-section {
+    background-color: #f1f4f2;
+    border-top: 5px dashed var(--coral);
+}
+.demo-box {
+    position: relative;
+    background-color: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    padding: 26px 30px 24px 30px;
+    margin-bottom: 34px;
+    box-shadow: 5px 5px 0 rgba(20, 38, 31, 0.15);
+}
+.demo-box h3 {
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    font-size: 19px;
+    color: var(--green);
+}
+.demo-num {
+    position: absolute;
+    top: -18px;
+    left: 22px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--coral);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-family: "Arial Black", sans-serif;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.demo-note {
+    font-size: 14.5px;
+    color: var(--ink);
+    background-color: #fffbe9;
+    border-left: 5px solid var(--sun);
+    padding: 10px 14px;
+    border-radius: 0 10px 10px 0;
+    margin: 12px 0;
+}
+code {
+    background-color: var(--ink);
+    color: var(--sun);
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+/* --- 13a. MARGIN COLLAPSING demo ---
+   Box A: margin-bottom 40px | Box B: margin-top 20px
+   The two vertical margins COLLAPSE into one 40px gap
+   (the larger value wins), not 40 + 20 = 60px. */
+.collapse-box {
+    width: 65%;
+    padding: 15px 18px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 14.5px;
+    box-sizing: border-box;
+}
+.collapse-a {
+    background-color: var(--mint);
+    margin-bottom: 40px;             /* bottom margin of first block */
+}
+.collapse-b {
+    background-color: var(--sun);
+    margin-top: 20px;                /* top margin of second block */
+}
+
+/* --- 13b. WIDTH / HEIGHT CONSTRAINTS demo --- */
+.constrained-box {
+    width: 60%;
+    height: 120px;
+    min-width: 300px;
+    max-width: 700px;
+    min-height: 80px;
+    max-height: 200px;
+    background-color: var(--blush);
+    border: 3px dashed var(--coral);
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-sizing: border-box;
+    font-family: "Courier New", monospace;
+    font-size: 14px;
+    color: var(--green);
+}
+
+/* --- 13c. OVERFLOW demo (visible / hidden / scroll) --- */
+.overflow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+}
+.overflow-box {
+    flex: 1;
+    min-width: 220px;
+    height: 115px;                  /* too short for the text on purpose */
+    background-color: #f6faf8;
+    border: 2px solid var(--green-2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.overflow-box p {
+    margin: 8px 0 0 0;
+}
+.overflow-visible {
+    overflow: visible;              /* text spills out */
+    margin-bottom: 46px;            /* room for the spill */
+}
+.overflow-hidden {
+    overflow: hidden;               /* text is cut off */
+}
+.overflow-scroll {
+    overflow: scroll;               /* scrollbars appear */
+}
+
+/* --- 13d. DISPLAY demo --- */
+.demo-block {
+    display: block;                 /* DISPLAY: block */
+    background-color: var(--ink);
+    color: var(--sun);
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.demo-inline {
+    display: inline;                /* DISPLAY: inline */
+    background-color: var(--coral);
+    color: var(--paper);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+.demo-inline-block {
+    display: inline-block;          /* DISPLAY: inline-block */
+    background-color: var(--sun);
+    color: var(--ink);
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.demo-none {
+    display: none;                  /* DISPLAY: none - hidden */
+    background-color: var(--green);
+    color: var(--paper);
+    padding: 4px 10px;
+}
+.hidden-note {
+    display: none;
+}
+
+
+/* ============================================================
+   14. FOOTER
+   ============================================================ */
+.site-foot {
+    background-color: var(--ink);
+    text-align: center;
+    padding: 38px 20px;
+    margin: 0;
+}
+.foot-brand {
+    font-family: "Arial Black", sans-serif;
+    font-size: 30px;
+    color: var(--sun);
+    letter-spacing: 1px;
+    margin: 0 0 8px 0;
+}
+.site-foot p {
+    margin: 4px 0;
+    font-size: 14.5px;
+}
+
+
+/* ============================================================
+   15. RESPONSIVE (small screens)
+   ============================================================ */
+@media screen and (max-width: 760px) {
+    .head-row {
+        justify-content: center;
+        text-align: center;
+    }
+    .main-nav {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .card {
+        width: 92%;
+    }
+    .collapse-box {
+        width: 92%;
+    }
+    .hero-title {
+        font-size: 38px;
+    }
+    .about-copy,
+    .about-facts {
+        transform: none;
+    }
+}
