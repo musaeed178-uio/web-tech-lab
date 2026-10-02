@@ -1,6 +1,20 @@
-/Lab 1/node_modules
-/Lab_Assignment_1_CampusConnect.pdf
+# OS junk
+Thumbs.db
+.DS_Store
+
+# Office docs, PDFs, archives — deliverables stay off GitHub
+*.docx
+*.pdf
+*.zip
+
+# Vercel local links
+.vercel/
+
+# Dependencies
+node_modules/
+
+# Old Lab 3 version — excluded from the repo, kept locally
+/Lab 3/FoodCorner/
+
+# Course brief (not mine to publish)
 /Lab 1/Lab_Assignment_1_LostAndFound.md
-/Lab 1/Lab_Assignment_1_Report.pdf
-/Lab 2.zip
-/Lab 1.zip
