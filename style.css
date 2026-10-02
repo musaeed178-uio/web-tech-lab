@@ -1,14 +1,16 @@
 :root {
-  --bg: #0f172a;
-  --bg-deep: #0b1220;
-  --panel: #131d33;
-  --panel-hi: #182443;
-  --amber: #f59e0b;
-  --amber-soft: #fbbf24;
-  --ink: #e5eaf3;
-  --muted: #94a3b8;
-  --line: rgba(148, 163, 184, 0.16);
-  --serif: Georgia, "Times New Roman", serif;
+  --bg: #0e0b08;
+  --bg-deep: #0a0806;
+  --panel: #191410;
+  --panel-hi: #221a12;
+  --gold: #d4af37;
+  --gold-soft: #f0d584;
+  --gold-deep: #a8862a;
+  --shire: #7f9c5e;
+  --ink: #ece3cf;
+  --muted: #b3a68c;
+  --line: rgba(212, 175, 55, 0.20);
+  --book: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
   --mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
 }
 
@@ -23,27 +25,27 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  font-family: var(--serif);
-  line-height: 1.65;
+  font-family: var(--book);
+  line-height: 1.7;
   background:
-    radial-gradient(1100px 480px at 82% -8%, rgba(245, 158, 11, 0.10), transparent 62%),
-    radial-gradient(900px 420px at -10% 30%, rgba(56, 89, 146, 0.14), transparent 60%),
+    radial-gradient(1000px 460px at 85% -10%, rgba(212, 175, 55, 0.12), transparent 60%),
+    radial-gradient(900px 500px at -15% 75%, rgba(127, 156, 94, 0.10), transparent 62%),
     var(--bg);
   min-height: 100vh;
 }
 
 a {
-  color: var(--amber);
+  color: var(--gold);
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--amber-soft);
+  color: var(--gold-soft);
   text-decoration: underline;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid var(--gold);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -52,7 +54,7 @@ a:focus-visible {
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--amber);
+  background: var(--gold);
   color: var(--bg-deep);
   padding: 0.6rem 1rem;
   font-family: var(--mono);
@@ -75,7 +77,7 @@ a:focus-visible {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(11, 18, 32, 0.88);
+  background: rgba(10, 8, 6, 0.90);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -100,13 +102,13 @@ a:focus-visible {
 
 .brand:hover {
   text-decoration: none;
-  color: var(--amber-soft);
+  color: var(--gold-soft);
 }
 
 .brand-chip {
   display: inline-block;
-  border: 1px solid var(--amber);
-  color: var(--amber);
+  border: 1px solid var(--gold);
+  color: var(--gold);
   border-radius: 6px;
   padding: 0.05rem 0.45rem;
   font-weight: 700;
@@ -129,43 +131,76 @@ a:focus-visible {
 }
 
 .topbar nav a:hover {
-  color: var(--amber-soft);
+  color: var(--gold-soft);
 }
 
 /* ---------- hero ---------- */
 
 .hero {
-  padding: 3.6rem 0 2.4rem;
+  position: relative;
+  padding: 3.8rem 0 2.2rem;
+  overflow: hidden;
+}
+
+.ring-glow {
+  position: absolute;
+  top: -70px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 26px solid rgba(212, 175, 55, 0.34);
+  box-shadow:
+    0 0 60px rgba(212, 175, 55, 0.35),
+    inset 0 0 40px rgba(212, 175, 55, 0.30);
+  pointer-events: none;
+  animation: ring-breath 6s ease-in-out infinite;
+}
+
+@keyframes ring-breath {
+  0%, 100% {
+    opacity: 0.40;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.045);
+  }
 }
 
 .kicker {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
+  font-family: var(--book);
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--amber);
-  margin: 0 0 0.7rem;
+  color: var(--gold);
+  margin: 0 0 0.8rem;
+  position: relative;
 }
 
 .hero h1 {
-  font-size: clamp(2.6rem, 7vw, 4.4rem);
-  line-height: 1.05;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1.04;
   margin: 0 0 0.5rem;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 30px rgba(212, 175, 55, 0.18);
+  position: relative;
 }
 
 .ring {
   font-style: italic;
   font-size: clamp(1.15rem, 2.6vw, 1.5rem);
-  color: var(--amber);
+  color: var(--gold);
   margin: 0 0 1.2rem;
+  position: relative;
 }
 
 .lede {
   font-size: clamp(1.02rem, 2vw, 1.18rem);
   max-width: 64ch;
-  margin: 0 0 1.3rem;
+  margin: 0 0 1.4rem;
+  position: relative;
 }
 
 .identity {
@@ -175,11 +210,12 @@ a:focus-visible {
   font-family: var(--mono);
   font-size: 0.8rem;
   margin: 0;
+  position: relative;
 }
 
 .id-name {
-  border: 1px solid var(--amber);
-  color: var(--amber);
+  border: 1px solid var(--gold);
+  color: var(--gold);
   border-radius: 999px;
   padding: 0.15rem 0.8rem;
 }
@@ -192,13 +228,33 @@ a:focus-visible {
   padding: 0.15rem 0.8rem;
 }
 
+/* ---------- ornament ---------- */
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.4rem 0 2.6rem;
+  color: var(--gold-deep);
+}
+
+.ornament span {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line) 30%, var(--line) 70%, transparent);
+}
+
+.ornament span:last-child {
+  background: linear-gradient(90deg, var(--line) 30%, var(--line) 70%, transparent);
+}
+
 /* ---------- lab cards ---------- */
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.2rem;
-  padding: 1rem 0 3rem;
+  gap: 1.3rem;
+  padding: 0 0 3rem;
 }
 
 .card {
@@ -209,28 +265,33 @@ a:focus-visible {
   background: linear-gradient(180deg, var(--panel-hi), var(--panel));
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 1.6rem 1.5rem 1.4rem;
-  transition: transform 0.18s ease, border-color 0.18s ease;
+  padding: 1.7rem 1.5rem 1.4rem;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: rgba(245, 158, 11, 0.45);
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), 0 0 26px rgba(212, 175, 55, 0.16);
 }
 
 .card-chip {
   position: absolute;
-  top: -0.8rem;
+  top: -1.05rem;
   right: 1.1rem;
   margin: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
   font-family: var(--mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--bg-deep);
-  background: var(--amber);
-  border-radius: 6px;
-  padding: 0.14rem 0.55rem;
+  color: var(--gold);
+  background: radial-gradient(circle at 35% 30%, #241c11, var(--bg-deep));
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
 }
 
 .card h2 {
@@ -250,7 +311,7 @@ a:focus-visible {
   font-family: var(--mono);
   font-size: 0.74rem;
   color: var(--muted);
-  background: rgba(11, 18, 32, 0.6);
+  background: rgba(10, 8, 6, 0.66);
   border: 1px dashed var(--line);
   border-radius: 8px;
   padding: 0.35rem 0.6rem;
@@ -274,7 +335,7 @@ a:focus-visible {
   align-items: center;
   gap: 0.35rem;
   border: 1px solid transparent;
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn:hover {
@@ -283,23 +344,24 @@ a:focus-visible {
 }
 
 .btn-primary {
-  background: var(--amber);
-  color: var(--bg-deep);
+  background: linear-gradient(180deg, var(--gold-soft), var(--gold) 55%, var(--gold-deep));
+  color: #1c1506;
+  box-shadow: 0 2px 10px rgba(212, 175, 55, 0.25);
 }
 
 .btn-primary:hover {
-  background: var(--amber-soft);
-  color: var(--bg-deep);
+  color: #1c1506;
+  box-shadow: 0 4px 16px rgba(212, 175, 55, 0.40);
 }
 
 .btn-ghost {
-  border-color: rgba(245, 158, 11, 0.55);
-  color: var(--amber);
+  border-color: rgba(212, 175, 55, 0.55);
+  color: var(--gold);
 }
 
 .btn-ghost:hover {
-  background: rgba(245, 158, 11, 0.10);
-  color: var(--amber-soft);
+  background: rgba(212, 175, 55, 0.10);
+  color: var(--gold-soft);
 }
 
 /* ---------- strips ---------- */
@@ -307,12 +369,12 @@ a:focus-visible {
 .strip {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.2rem;
-  padding-bottom: 3.5rem;
+  gap: 1.3rem;
+  padding-bottom: 3.6rem;
 }
 
 .strip-col {
-  background: rgba(11, 18, 32, 0.55);
+  background: rgba(10, 8, 6, 0.55);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 1.3rem 1.4rem;
@@ -320,8 +382,8 @@ a:focus-visible {
 
 .strip-col h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.05rem;
-  color: var(--amber);
+  font-size: 1.06rem;
+  color: var(--gold);
 }
 
 .strip-col p {
@@ -335,8 +397,8 @@ a:focus-visible {
 }
 
 .strip-col code {
-  font-family: var(--serif);
-  font-size: 0.92rem;
+  font-family: var(--book);
+  font-size: 0.94rem;
   color: var(--ink);
 }
 
@@ -385,7 +447,7 @@ a:focus-visible {
 }
 
 .foot-note a:hover {
-  color: var(--amber-soft);
+  color: var(--gold-soft);
 }
 
 /* ---------- motion & small screens ---------- */
@@ -393,6 +455,11 @@ a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .ring-glow {
+    animation: none;
+    opacity: 0.55;
   }
 
   .card,
@@ -406,7 +473,15 @@ a:focus-visible {
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  .ring-glow {
+    width: 200px;
+    height: 200px;
+    border-width: 18px;
+    top: -50px;
+    right: -50px;
+  }
+
   .hero {
     padding-top: 2.6rem;
   }
